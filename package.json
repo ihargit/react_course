@@ -7,8 +7,7 @@
     "test": "jest",
     "dev": "webpack-dev-server --mode development --open --hot",
     "create": "webpack",
-    "start": "webpack-dev-server --open",
-    "init": "jest --init"
+    "start": "webpack-dev-server --open"
   },
   "repository": {
     "type": "git",
