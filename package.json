@@ -5,9 +5,8 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server --mode development --open --hot",
-    "create": "webpack",
-    "start": "webpack-dev-server --open"
+    "start": "webpack serve --open --config webpack.dev.js",
+    
   },
   "repository": {
     "type": "git",
@@ -32,7 +31,8 @@
     "style-loader": "^2.0.0",
     "webpack": "^5.23.0",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
   },
   "dependencies": {
     "react": "^17.0.1",
