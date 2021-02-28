@@ -1,12 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   entry: './src/index.js',
-  mode: 'development',
+  mode: isProduction ? 'production' : 'development',
   module: {
     rules: [
       {
@@ -40,6 +39,8 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    ...(isProduction ? [new UglifyJsPlugin()] : []),
+    new webpack.ProvidePlugin({
+             process: 'process/browser',
+      }),
   ],
 };
