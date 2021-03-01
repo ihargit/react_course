@@ -4,7 +4,7 @@ import Search from '../Search';
 
 const Header = (props) => (
   <header className="header">
-    <img src="/images/logo.png" alt="netflixroulette" />
+    <img src="" alt="netflixroulette" />
     <button>+ ADD MOVIE</button>
     <Search />
   </header>
