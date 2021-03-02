@@ -1,28 +1,44 @@
 import React from 'react';
 import './style.css';
-import { v4 as uuidv4 } from 'uuid';
-import MoviesListControls from './controls';
+import MoviesGenres from './genres';
+import MoviesFound from './moviesFound';
+import SortBySelector from './sortSelector';
+import Movies from './movies';
 
 const getGenres = (moviesData) => {
-  const genres = { all: true };
-  moviesData.forEarch(({ genres }) =>
-    genres.forEarch((genre) => {
-      if (!genres[genre]) {
-        genres[genre] = true;
+  const allGenres = { all: true };
+  moviesData.forEach(({ genres }) =>
+    genres.forEach((genre) => {
+      if (!allGenres[genre]) {
+        allGenres[genre] = true;
       }
     })
   );
-  return Object.keys(genres);
+  return Object.keys(allGenres);
 };
 
-const MoviesList = ({ movies }) => {
-  // const genres = getGenres(movies.data);
+const getMoviesToDisplayData = (data) =>
+  data.map(({ poster_path, title, genres, release_date }) => ({
+    url: poster_path,
+    title,
+    genre: genres.join(','),
+    releaseDate: new Date(release_date).getFullYear(),
+  }));
+
+const getMoviesToDisplay = (moviesData, genre) =>
+  moviesData.filter((movie) => genre === 'all' || movie.genres.includes(genre));
+
+const MoviesList = ({ movies, genreToSelect = 'all' }) => {
+  const moviesToDisplay = getMoviesToDisplay(movies.data, genreToSelect);
+  const genres = getGenres(moviesToDisplay);
+  const moviesNumber = moviesToDisplay.length;
+  const moviesToDisplayData = getMoviesToDisplayData(moviesToDisplay);
   return (
     <>
-      {/* <MoviesListControls genres={genres} /> */}
-      {movies.data.map(({ title }) => (
-        <p key={uuidv4()}>Title: {title}</p>
-      ))}
+      <MoviesGenres genres={genres} />
+      <SortBySelector />
+      <MoviesFound number={moviesNumber} />
+      <Movies data={moviesToDisplayData} />
     </>
   );
 };
