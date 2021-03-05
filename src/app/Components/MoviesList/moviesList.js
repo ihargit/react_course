@@ -22,7 +22,7 @@ const getMoviesToDisplayData = (data) =>
     url: poster_path || undefined,
     title,
     genre: genres.join(',') || undefined,
-    releaseDate: new Date(release_date).getFullYear() || undefined,
+    releaseDate: String(new Date(release_date).getFullYear()) || undefined,
   }));
 
 const getMoviesToDisplay = (moviesData, genre) =>
