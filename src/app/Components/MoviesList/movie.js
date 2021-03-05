@@ -1,8 +1,7 @@
 import React from 'react';
 import './style.css';
 
-const Movie = ({ movieData }) => {
-  const { url, title, genre, releaseDate } = movieData;
+const Movie = ({ url, title, genre, releaseDate }) => {
   return (
     <div className="movie">
       <p>{title}</p>
@@ -10,6 +9,13 @@ const Movie = ({ movieData }) => {
       <p>{releaseDate}</p>
     </div>
   );
+};
+
+Movie.defaultProps = {
+  url: 'url',
+  title: 'Some title',
+  genre: 'Some genre',
+  releaseDate: '2022',
 };
 
 export default Movie;

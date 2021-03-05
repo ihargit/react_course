@@ -8,7 +8,7 @@ import Movies from './movies';
 const getGenres = (moviesData) => {
   const allGenres = { all: true };
   moviesData.forEach(({ genres }) =>
-    genres.forEach((genre) => {
+    (genres || []).forEach((genre) => {
       if (!allGenres[genre]) {
         allGenres[genre] = true;
       }
@@ -18,11 +18,11 @@ const getGenres = (moviesData) => {
 };
 
 const getMoviesToDisplayData = (data) =>
-  data.map(({ poster_path, title, genres, release_date }) => ({
-    url: poster_path,
+  data.map(({ poster_path, title, genres = [], release_date }) => ({
+    url: poster_path || undefined,
     title,
-    genre: genres.join(','),
-    releaseDate: new Date(release_date).getFullYear(),
+    genre: genres.join(',') || undefined,
+    releaseDate: new Date(release_date).getFullYear() || undefined,
   }));
 
 const getMoviesToDisplay = (moviesData, genre) =>
