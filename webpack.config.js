@@ -1,12 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
+const devPort = 3001;
 
 module.exports = {
   entry: './src/index.js',
-  mode: 'development',
+  mode: isProduction ? 'production' : 'development',
   module: {
     rules: [
       {
@@ -34,12 +34,14 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'public/'),
-    port: 3000,
-    publicPath: 'http://localhost:3000/dist/',
+    port: devPort,
+    publicPath: `http://localhost:${devPort}/dist/`,
     hotOnly: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    ...(isProduction ? [new UglifyJsPlugin()] : []),
+    new webpack.ProvidePlugin({
+             process: 'process/browser',
+      }),
   ],
 };
