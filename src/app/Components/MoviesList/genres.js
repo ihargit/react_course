@@ -6,7 +6,7 @@ const MoviesGenres = ({ genres }) => {
   const genresList = genres.map((genre) => <li key={uuidv4()}>{genre}</li>);
   return (
     <>
-      <ul className="genre-selector">{genresList}</ul>
+      <ul id="genre-selector">{genresList}</ul>
     </>
   );
 };

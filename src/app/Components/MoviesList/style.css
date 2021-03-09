@@ -1,4 +1,11 @@
-.genre-selector {
+#genre-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+#genre-selector li {
+  display: inline-block;
+
 }
 .movies-sort-selector {
 }

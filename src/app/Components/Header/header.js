@@ -3,9 +3,11 @@ import './style.css';
 import Search from '../Search';
 
 const Header = (props) => (
-  <header className="header">
-    <img src="" alt="netflixroulette" />
-    <button>+ ADD MOVIE</button>
+  <header id="header">
+    <div id="top-bar">
+      <img src="" alt="netflixroulette" />
+      <button>+ ADD MOVIE</button>
+    </div>
     <Search />
   </header>
 );
