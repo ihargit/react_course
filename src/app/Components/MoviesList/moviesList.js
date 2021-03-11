@@ -35,10 +35,14 @@ const MoviesList = ({ movies, genreToSelect = 'all' }) => {
   const moviesToDisplayData = getMoviesToDisplayData(moviesToDisplay);
   return (
     <>
-      <MoviesGenres genres={genres} />
-      <SortBySelector />
-      <MoviesFound number={moviesNumber} />
-      <Movies data={moviesToDisplayData} />
+      <div className="container-padding flex">
+        <MoviesGenres genres={genres} />
+        <SortBySelector />
+      </div>
+      <div className="container-padding">
+        <MoviesFound number={moviesNumber} />
+        <Movies data={moviesToDisplayData} />
+      </div>
     </>
   );
 };

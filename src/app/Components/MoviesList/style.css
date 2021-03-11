@@ -12,3 +12,12 @@
 .movie {
   background-color: rgb(197, 197, 206);
 }
+.container-padding {
+  padding: 1em 2em 1em 2em;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
