@@ -25,18 +25,29 @@ const getMoviesToDisplayData = (data) =>
     releaseDate: String(new Date(release_date).getFullYear()) || undefined,
   }));
 
-const getMoviesToDisplay = (moviesData, genre) =>
-  moviesData.filter((movie) => genre === 'all' || movie.genres.includes(genre));
+const getMoviesToDisplay = (moviesData, genre = 'all') => {
+  console.log('moviesData', moviesData);
+  console.log('genre', genre);
+  const genreLower = String(genre).toLowerCase();
+  return moviesData.filter(
+    (movie) =>
+      genreLower === 'all' ||
+      (movie.genres &&
+        !!movie.genres.find(
+          (genreAny) => genreAny.toLowerCase() === genreLower
+        ))
+  );
+};
 
-const MoviesList = ({ movies, genreToSelect = 'all' }) => {
-  const moviesToDisplay = getMoviesToDisplay(movies.data, genreToSelect);
+const MoviesList = ({ movies, genre, setGenre }) => {
+  const moviesToDisplay = getMoviesToDisplay(movies.data, genre);
   const genres = getGenres(moviesToDisplay);
   const moviesNumber = moviesToDisplay.length;
   const moviesToDisplayData = getMoviesToDisplayData(moviesToDisplay);
   return (
     <>
       <div className="container-padding flex">
-        <MoviesGenres genres={genres} selected={genreToSelect}/>
+        <MoviesGenres genres={genres} selected={genre} setGenre={setGenre} />
         <SortBySelector />
       </div>
       <div className="container-padding">
