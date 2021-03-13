@@ -42,3 +42,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+.flex-grow-10 {
+  flex-grow: 10;
+}

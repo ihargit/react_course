@@ -26,8 +26,6 @@ const getMoviesToDisplayData = (data) =>
   }));
 
 const getMoviesToDisplay = (moviesData, genre = 'all') => {
-  console.log('moviesData', moviesData);
-  console.log('genre', genre);
   const genreLower = String(genre).toLowerCase();
   return moviesData.filter(
     (movie) =>
@@ -50,7 +48,7 @@ const MoviesList = ({ movies, genre, setGenre }) => {
         <MoviesGenres genres={genres} selected={genre} setGenre={setGenre} />
         <SortBySelector />
       </div>
-      <div className="container-padding">
+      <div className="container-padding flex-grow-10">
         <MoviesFound number={moviesNumber} />
         <Movies data={moviesToDisplayData} />
       </div>

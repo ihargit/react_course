@@ -1,6 +1,19 @@
+html {
+  height: 100vh;
+}
+
 body {
   margin: 0px;
+  height: 100vh;
 }
+
 .app {
   font-family: 'Courier New', Courier, monospace;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
