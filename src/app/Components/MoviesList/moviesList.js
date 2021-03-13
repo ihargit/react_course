@@ -36,7 +36,7 @@ const MoviesList = ({ movies, genreToSelect = 'all' }) => {
   return (
     <>
       <div className="container-padding flex">
-        <MoviesGenres genres={genres} />
+        <MoviesGenres genres={genres} selected={genreToSelect}/>
         <SortBySelector />
       </div>
       <div className="container-padding">
