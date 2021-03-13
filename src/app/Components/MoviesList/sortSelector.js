@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 const SortBySelector = () => {
   return (
     <form action="" className="movies-sort-selector">
-      <label>sort by</label>
+      <label>SORT BY</label>
       <select
         id="sortBy"
         name="sort"

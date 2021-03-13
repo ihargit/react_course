@@ -13,11 +13,13 @@
   background-color: Transparent;
   background-repeat:no-repeat;
   border: none;
+  padding-top: 10px;
   padding-bottom: 10px;
   cursor:pointer;
   overflow: hidden;
   outline:none;
   text-transform: uppercase;
+  font-size: 0.8em;
 }
 
 .genre-button:hover {
@@ -25,11 +27,30 @@
 }
 
 .genre-button-selected {
+  margin-right: 0px;
   border-bottom: 1px solid red
 }
 
 .movies-sort-selector {
+  font-size: 0.8em;
+  margin: auto;
+  margin-right: 0px;
 }
+
+.movies-sort-selector label{
+  padding-right: 1em;
+}
+
+.movies-sort-selector select{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  text-transform: uppercase;
+}
+
 .movie {
   background-color: rgb(197, 197, 206);
 }
