@@ -2,15 +2,17 @@ import React from 'react';
 import './style.css';
 import { v4 as uuidv4 } from 'uuid';
 
-const SortBySelector = () => {
+const SortBySelector = ({ setSelector, selectors, selector }) => {
+  const onChange = (e) => {
+    // e.preventDefault();
+    setSelector(e.target.value);
+    console.log(selector)
+  }
   return (
-    <form action="" className="movies-sort-selector">
+    <form action="sortBy" className="movies-sort-selector">
       <label>SORT BY</label>
-      <select
-        id="sortBy"
-        name="sort"
-      >
-      <option value="releaseDate">release date</option>
+      <select id="sortBy" name="sort" value={selector.value} onChange={onChange}>
+        {selectors.map(({value, view}) => (<option value={value} key={uuidv4()}>{view}</option>))}
       </select>
     </form>
   );

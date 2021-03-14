@@ -9,12 +9,13 @@ const getGenres = (moviesData) => {
   const allGenres = { all: true };
   moviesData.forEach(({ genres }) =>
     (genres || []).forEach((genre) => {
-      if (!allGenres[genre]) {
-        allGenres[genre] = true;
+      const genreLower = genre.toLowerCase();
+      if (!allGenres[genreLower]) {
+        allGenres[genreLower] = true;
       }
     })
   );
-  return Object.keys(allGenres);
+  return Object.keys(allGenres).sort();
 };
 
 const getMoviesToDisplayData = (data) =>
@@ -25,7 +26,7 @@ const getMoviesToDisplayData = (data) =>
     releaseDate: String(new Date(release_date).getFullYear()) || undefined,
   }));
 
-const getMoviesToDisplay = (moviesData, genre = 'all') => {
+const getMoviesToDisplay = (moviesData, genre = 'all', selector) => {
   const genreLower = String(genre).toLowerCase();
   return moviesData.filter(
     (movie) =>
@@ -34,11 +35,11 @@ const getMoviesToDisplay = (moviesData, genre = 'all') => {
         !!movie.genres.find(
           (genreAny) => genreAny.toLowerCase() === genreLower
         ))
-  );
+  ).sort((a,b) => a[selector] - b[selector]);
 };
 
-const MoviesList = ({ movies, genre, setGenre }) => {
-  const moviesToDisplay = getMoviesToDisplay(movies.data, genre);
+const MoviesList = ({ movies, genre, setGenre, selector, setSelector, selectors }) => {
+  const moviesToDisplay = getMoviesToDisplay(movies.data, genre, selector);
   const genres = getGenres(moviesToDisplay);
   const moviesNumber = moviesToDisplay.length;
   const moviesToDisplayData = getMoviesToDisplayData(moviesToDisplay);
@@ -46,7 +47,7 @@ const MoviesList = ({ movies, genre, setGenre }) => {
     <>
       <div className="container-padding flex">
         <MoviesGenres genres={genres} selected={genre} setGenre={setGenre} />
-        <SortBySelector />
+        <SortBySelector setSelector={setSelector} selectors={selectors} selector={selector}/>
       </div>
       <div className="container-padding flex-grow-10">
         <MoviesFound number={moviesNumber} />
