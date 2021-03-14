@@ -11,7 +11,7 @@ const SortBySelector = ({ setSelector, selectors, selector }) => {
   return (
     <form action="sortBy" className="movies-sort-selector">
       <label>SORT BY</label>
-      <select id="sortBy" name="sort" value={selector.value} onChange={onChange}>
+      <select id="sortBy" name="sort" onChange={onChange}>
         {selectors.map(({value, view}) => (<option value={value} key={uuidv4()}>{view}</option>))}
       </select>
     </form>

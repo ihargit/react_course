@@ -35,7 +35,7 @@ const getMoviesToDisplay = (moviesData, genre = 'all', selector) => {
         !!movie.genres.find(
           (genreAny) => genreAny.toLowerCase() === genreLower
         ))
-  ).sort((a,b) => a[selector] - b[selector]);
+  ).sort((a,b) => b[selector] - a[selector]);
 };
 
 const MoviesList = ({ movies, genre, setGenre, selector, setSelector, selectors }) => {
