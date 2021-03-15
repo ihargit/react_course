@@ -3,6 +3,9 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   padding-inline-start: 0;
+  margin-block-end: 0px;
+  margin-block-start: 0px;
+  margin-top: 7px;
 }
 #genre-selector li {
   display: inline-block;
@@ -35,6 +38,8 @@
   font-size: 0.8em;
   margin: auto;
   margin-right: 0px;
+  margin-left: 0px;
+  margin-top: 15px;
 }
 
 .movies-sort-selector label{
@@ -51,11 +56,26 @@
   text-transform: uppercase;
 }
 
+.movies {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .movie {
+  justify-content: space-around;
+  margin: 1em;
+}
+
+.movie-image {
+  min-height: 350px;
+  min-width: 250px;
   background-color: rgb(197, 197, 206);
 }
+
 .container-padding {
-  padding: 1em 2em 1em 2em;
+  padding: 0em 2em;
 }
 
 .flex {

@@ -4,7 +4,7 @@ import './style.css';
 import Movie from './movie';
 
 const Movies = ({ data }) => (
-  <div>
+  <div className="movies">
     {data.map((movieData) => {
       const { url, title, genre, releaseDate } = movieData;
       return (

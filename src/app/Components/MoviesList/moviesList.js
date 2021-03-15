@@ -28,17 +28,26 @@ const getMoviesToDisplayData = (data) =>
 
 const getMoviesToDisplay = (moviesData, genre = 'all', selector) => {
   const genreLower = String(genre).toLowerCase();
-  return moviesData.filter(
-    (movie) =>
-      genreLower === 'all' ||
-      (movie.genres &&
-        !!movie.genres.find(
-          (genreAny) => genreAny.toLowerCase() === genreLower
-        ))
-  ).sort((a,b) => b[selector] - a[selector]);
+  return moviesData
+    .filter(
+      (movie) =>
+        genreLower === 'all' ||
+        (movie.genres &&
+          !!movie.genres.find(
+            (genreAny) => genreAny.toLowerCase() === genreLower
+          ))
+    )
+    .sort((a, b) => b[selector] - a[selector]);
 };
 
-const MoviesList = ({ movies, genre, setGenre, selector, setSelector, selectors }) => {
+const MoviesList = ({
+  movies,
+  genre,
+  setGenre,
+  selector,
+  setSelector,
+  selectors,
+}) => {
   const moviesToDisplay = getMoviesToDisplay(movies.data, genre, selector);
   const genres = getGenres(moviesToDisplay);
   const moviesNumber = moviesToDisplay.length;
@@ -47,10 +56,16 @@ const MoviesList = ({ movies, genre, setGenre, selector, setSelector, selectors 
     <>
       <div className="container-padding flex">
         <MoviesGenres genres={genres} selected={genre} setGenre={setGenre} />
-        <SortBySelector setSelector={setSelector} selectors={selectors} selector={selector}/>
+        <SortBySelector
+          setSelector={setSelector}
+          selectors={selectors}
+          selector={selector}
+        />
+      </div>
+      <div className="container-padding">
+        <MoviesFound number={moviesNumber} />
       </div>
       <div className="container-padding flex-grow-10">
-        <MoviesFound number={moviesNumber} />
         <Movies data={moviesToDisplayData} />
       </div>
     </>
