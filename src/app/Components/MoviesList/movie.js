@@ -8,10 +8,12 @@ const Movie = ({ url, title, genre, releaseDate }) => {
   return (
     <ErrorBoundary>
       <div className="movie">
-        <img className="movie-image" src={url}/>
-        <p className="movie-title">{title}</p>
-        <p className="release-date">{releaseDate}</p>
-        <p>{genre}</p>
+        <img className="movie-image" src={url} />
+        <div className="movie-description">
+          <p className="movie-title">{title}</p>
+          <div className="movie-release-date">{releaseDate}</div>
+        </div>
+        <p className="movie-genre">{genre}</p>
       </div>
     </ErrorBoundary>
   );
