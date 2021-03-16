@@ -9,9 +9,9 @@ const Movie = ({ url, title, genre, releaseDate }) => {
     <ErrorBoundary>
       <div className="movie">
         <img className="movie-image" src={url}/>
-        <p>{title}</p>
+        <p className="movie-title">{title}</p>
+        <p className="release-date">{releaseDate}</p>
         <p>{genre}</p>
-        <p>{releaseDate}</p>
       </div>
     </ErrorBoundary>
   );
