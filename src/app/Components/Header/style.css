@@ -1,3 +1,12 @@
-.header {
-  
+#header {
+  display: flex;
+  flex-flow: column wrap;
+  height: fit-content;
+  background-color: cadetblue;
+  padding: 1em 2em 2em 2em;
+}
+
+#top-bar {
+  display: flex;
+  justify-content: space-between;
 }

@@ -1,3 +1,19 @@
-.search {
-  
+#search {
+  align-self: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+#search form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#search form textarea {
+  margin-right: 1em;
+}
+
+#search form textarea, #search form input {
+  margin-top: 0.5em;
 }

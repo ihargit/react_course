@@ -1,0 +1,55 @@
+.modal-wrap {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  color: white;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background-color: #424242;
+  border-radius: 3px;
+  margin: 5% auto;
+  padding: 20px;
+  height: fit-content;
+  width: fit-content;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-close-button {
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.modal-close-button:focus {
+  outline: 0px solid grey;
+}
+
+.modal-wrap label {
+  font-size: 0.8em;
+  color: #f65261;
+}
+.modal-wrap p {
+  margin: 0.2em 0em;
+}
+
+.modal-wrap form {
+  font-size: 0.8em;
+}
+
+.modal-wrap input,  .modal-wrap select, .modal-wrap textarea {
+  margin: 0.2em 0em;
+  width: 100%;
+}
