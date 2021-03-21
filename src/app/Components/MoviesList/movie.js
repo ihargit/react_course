@@ -3,18 +3,53 @@ import './style.css';
 import PropTypes from 'prop-types';
 import ErrorBoundary from '../ErrorBoundary';
 import Movies from './movies';
+import ModalWrap from '../ModalWrap';
 
-const Movie = ({ url, title, genre, releaseDate }) => {
+const Movie = ({
+  url,
+  title,
+  genre,
+  releaseDate,
+  openModal,
+  changeModalInner,
+}) => {
   const [hidden, setHidden] = useState('hide');
-  const toggleHidden = () => setHidden( hidden ? '' : 'hide');
+  const toggleHidden = () => setHidden(hidden ? '' : 'hide');
+
+  const editInput = () => (
+    <form>
+      <label for="fname">Edit</label>
+    </form>
+  );
+
+  const deleteInput = () => (
+    <form>
+      <label for="fname">Delete</label>
+    </form>
+  );
+
+  const prepareModal = (inputType) => () => {
+    changeModalInner(inputType);
+    openModal();
+  };
+
   return (
     <ErrorBoundary>
       <div className="movie">
-        <button className="movie-three-dots-icon hide" onClick={toggleHidden}></button>
+        <button
+          className="movie-three-dots-icon hide"
+          onClick={toggleHidden}
+        ></button>
         <div className={`movie-three-dots-menu ${hidden}`}>
-          <button>x</button>
-          <button>Edit</button>
-          <button>Delete</button>
+          <button className="close-menu-button" onClick={toggleHidden}>
+            x
+          </button>
+          <button className="edit-button" onClick={prepareModal(editInput)}>
+            Edit
+          </button>
+          <button className="delete-button" onClick={prepareModal(deleteInput)}>
+            Delete
+          </button>
         </div>
         <img className="movie-image" src={url} />
         <div className="movie-description">
