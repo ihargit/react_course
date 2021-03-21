@@ -4,6 +4,7 @@ import Header from '../../Components/Header';
 import MoviesList from '../../Components/MoviesList';
 import Footer from '../../Components/Footer';
 import * as allMovies from './movies.json';
+import ModalWrap from '../../Components/ModalWrap';
 
 export default function Page() {
   const defaultGenre = 'all';
@@ -14,13 +15,33 @@ export default function Page() {
     { value: 'vote_count', view: 'vote count' },
     { value: 'revenue', view: 'revenue' },
   ];
+  const genresPossible = [
+    { value: 'comedy', view: 'comedy' },
+    { value: 'drama', view: 'drama' },
+    { value: 'romance', view: 'romance' },
+  ];
   const [movies, setMovies] = useState(allMovies);
   const [genreToSelect, setGenre] = useState(defaultGenre);
   const [selector, setSelector] = useState(selectors[0].value);
 
+  const [isOpen, changeIsOpen] = useState(false);
+  const [modalInner, changeModalInner] = useState(() => {});
+
+  const onModalOpen = () => {
+    changeIsOpen(true);
+  };
+  const onModalClose = () => {
+    changeIsOpen(false);
+  };
+
   return (
     <>
-      <Header />
+      <Header
+        openModal={onModalOpen}
+        closeModal={onModalClose}
+        changeModalInner={changeModalInner}
+        genresPossible={genresPossible}
+      />
       <MoviesList
         movies={movies}
         setMovies={setMovies}
@@ -29,7 +50,14 @@ export default function Page() {
         selectors={selectors}
         selector={selector}
         setSelector={setSelector}
+        genresPossible={genresPossible}
+        openModal={onModalOpen}
+        closeModal={onModalClose}
+        changeModalInner={changeModalInner}
       />
+      <ModalWrap isOpen={isOpen} onClose={onModalClose}>
+        <>{modalInner}</>
+      </ModalWrap>
       <Footer />
     </>
   );

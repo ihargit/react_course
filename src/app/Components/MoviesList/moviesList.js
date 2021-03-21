@@ -19,12 +19,25 @@ const getGenres = (moviesData) => {
 };
 
 const getMoviesToDisplayData = (data) =>
-  data.map(({ poster_path, title, genres = [], release_date }) => ({
-    url: poster_path || undefined,
-    title,
-    genre: genres.join(',') || undefined,
-    releaseDate: String(new Date(release_date).getFullYear()) || undefined,
-  }));
+  data.map(
+    ({
+      poster_path,
+      title,
+      genres = [],
+      release_date,
+      id,
+      overview,
+      runtime,
+    }) => ({
+      url: poster_path || undefined,
+      title,
+      genre: genres.join(',') || undefined,
+      releaseDate: release_date || undefined,
+      id,
+      overview,
+      runtime,
+    })
+  );
 
 const getMoviesToDisplay = (moviesData, genre = 'all', selector) => {
   const genreLower = String(genre).toLowerCase();
@@ -47,6 +60,10 @@ const MoviesList = ({
   selector,
   setSelector,
   selectors,
+  genresPossible,
+  openModal,
+  closeModal,
+  changeModalInner,
 }) => {
   const moviesToDisplay = getMoviesToDisplay(movies.data, genre, selector);
   const genres = getGenres(moviesToDisplay);
@@ -66,7 +83,13 @@ const MoviesList = ({
         <MoviesFound number={moviesNumber} />
       </div>
       <div className="container-padding flex-grow-10">
-        <Movies data={moviesToDisplayData} />
+        <Movies
+          data={moviesToDisplayData}
+          genresPossible={genresPossible}
+          openModal={openModal}
+          closeModal={closeModal}
+          changeModalInner={changeModalInner}
+        />
       </div>
     </>
   );

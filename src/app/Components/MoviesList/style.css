@@ -180,3 +180,26 @@
 .close-menu-button {
   text-indent: 75px;
 }
+
+.button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 1em;
+}
+
+.button:focus {
+  outline: 0px solid grey;
+}
+
+.red {
+  color: white;
+  background-color: #f65261
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
