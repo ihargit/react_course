@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import ErrorBoundary from '../ErrorBoundary';
 import Movies from './movies';
 import ModalWrap from '../ModalWrap';
+import { editAddModalInput, getDeleteModalInput } from './moviesModalsInputs';
 
 const Movie = ({
   url,
@@ -21,92 +22,19 @@ const Movie = ({
 }) => {
   const [hidden, setHidden] = useState('hide');
   const toggleHidden = () => setHidden(hidden ? '' : 'hide');
-
-  const editInput = () => (
-    <>
-      <h4>EDIT MOVIE</h4>
-      <form>
-        <label>MOVIE ID</label>
-        <p>{id}</p>
-        <label>TITLE</label>
-        <br />
-        <input type="text" defaultValue={title} id="title" name="title"></input>
-        <br />
-        <label>RELEASE DATE</label>
-        <br />
-        <input
-          type="date"
-          defaultValue={releaseDate}
-          id="releaseDate"
-          name="releaseDate"
-        ></input>
-        <br />
-        <label>MOVIE URL</label>
-        <br />
-        <input
-          type="text"
-          defaultValue="www.url.com"
-          id="movieUrl"
-          name="movieUrl"
-        ></input>
-        <br />
-        <label>GENRE</label>
-        <br />
-        <select id="genre" name="genre" defaultValue={genre} onChange={()=>{}}>
-          {genresPossible.map(({ value, view }) => (
-            <option value={value} key={uuidv4()}>
-              {view}
-            </option>
-          ))}
-        </select>
-        <br />
-        <label>OVERVIEW</label>
-        <br />
-        <textarea
-          defaultValue={overview}
-          id="overview"
-          name="overview"
-        ></textarea>
-        <br />
-        <label>RUNTIME</label>
-        <br />
-        <input
-          type="text"
-          defaultValue={runtime}
-          id="runtime"
-          name="runtime"
-        ></input>
-        <br />
-      </form>
-      <div className="modal-buttons">
-        <button
-          className="button red"
-          onClick={(id) => {
-            closeModal(); // TODO implement movie deletion
-          }}
-        >
-          SAVE
-        </button>
-      </div>
-    </>
-  );
-
-  const deleteInput = () => (
-    <>
-      <p>DELETE MOVIE</p>
-      <p>Are you sure you want to delete this movie?</p>
-      <div className="modal-buttons">
-        <button
-          className="button red"
-          onClick={(id) => {
-            closeModal(); // TODO implement movie deletion
-          }}
-        >
-          CONFIRM
-        </button>
-      </div>
-    </>
-  );
+  const editInput = editAddModalInput({
+    url,
+    title,
+    genre,
+    id,
+    releaseDate,
+    closeModal,
+    genresPossible,
+    overview,
+    runtime,
+  });
+  
+  const deleteInput = getDeleteModalInput({id, closeModal});
 
   const prepareModal = (inputType) => () => {
     changeModalInner(inputType);
