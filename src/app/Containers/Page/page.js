@@ -26,6 +26,7 @@ export default function Page() {
 
   const [isOpen, changeIsOpen] = useState(false);
   const [modalInner, changeModalInner] = useState(() => {});
+  const [showMovieDescription, changeShowMovieDescription] = useState(false);
 
   const onModalOpen = () => {
     changeIsOpen(true);
@@ -41,6 +42,8 @@ export default function Page() {
         closeModal={onModalClose}
         changeModalInner={changeModalInner}
         genresPossible={genresPossible}
+        showMovieDescription={showMovieDescription}
+        changeShowMovieDescription={changeShowMovieDescription}
       />
       <MoviesList
         movies={movies}
@@ -54,6 +57,7 @@ export default function Page() {
         openModal={onModalOpen}
         closeModal={onModalClose}
         changeModalInner={changeModalInner}
+        changeShowMovieDescription={changeShowMovieDescription}
       />
       <ModalWrap isOpen={isOpen} onClose={onModalClose}>
         <>{modalInner}</>

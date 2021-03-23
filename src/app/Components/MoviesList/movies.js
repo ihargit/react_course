@@ -9,6 +9,7 @@ const Movies = ({
   openModal,
   closeModal,
   changeModalInner,
+  changeShowMovieDescription
 }) => {
 
   return (
@@ -22,6 +23,7 @@ const Movies = ({
           id,
           overview,
           runtime,
+          voteAverage,
         } = movieData;
         return (
           <Movie
@@ -37,6 +39,8 @@ const Movies = ({
             closeModal={closeModal}
             changeModalInner={changeModalInner}
             genresPossible={genresPossible}
+            voteAverage={voteAverage}
+            changeShowMovieDescription={changeShowMovieDescription}
           />
         );
       })}

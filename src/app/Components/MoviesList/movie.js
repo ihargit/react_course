@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './style.css';
 import PropTypes from 'prop-types';
@@ -19,6 +19,8 @@ const Movie = ({
   genresPossible,
   overview,
   runtime,
+  voteAverage,
+  changeShowMovieDescription,
 }) => {
   const [hidden, setHidden] = useState('hide');
   const toggleHidden = () => setHidden(hidden ? '' : 'hide');
@@ -33,17 +35,28 @@ const Movie = ({
     overview,
     runtime,
   });
-  
-  const deleteInput = getDeleteModalInput({id, closeModal});
+
+  const deleteInput = getDeleteModalInput({ id, closeModal });
 
   const prepareModal = (inputType) => () => {
     changeModalInner(inputType);
     openModal();
   };
 
+  const movieEl = useRef();
+  const onEvent = (e) => {
+    if (movieEl.current.contains(e.target)) {
+      changeShowMovieDescription(true);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('mouseup', onEvent);
+    return () => window.removeEventListener('mouseup', onEvent);
+  }, [onEvent]);
+
   return (
     <ErrorBoundary>
-      <div className="movie">
+      <div className="movie" ref={movieEl}>
         <button
           className="movie-three-dots-icon hide"
           onClick={toggleHidden}

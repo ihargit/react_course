@@ -1,0 +1,9 @@
+.movie-detailes {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.movie-detailes .movie-image {
+  height: 100px;
+  width: 35px;
+}
