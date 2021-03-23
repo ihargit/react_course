@@ -7,3 +7,52 @@
   height: 100px;
   width: 35px;
 }
+
+.movie-detailes .movie-description {
+  margin: 20px 30px;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.movie-detailes-header {
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  flex-wrap: wrap;
+  margin-bottom: -2.5em;
+}
+
+.movie-detailes-header .movie-title {
+  display: inline;
+}
+
+.movie-detailes-header .movie-vote {
+  width: 3em;
+  height: 3em;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 50%;
+  margin-left: 20px;
+  color: green;
+}
+
+.movie-detailes-header .movie-title {
+  font-size: 2em;
+  color: white;
+}
+
+.movie-tagline {
+  margin-inline-start: 0px;
+  color: white;
+  opacity: 70%;
+}
+
+.movie-release {
+  color: #f65261;
+}

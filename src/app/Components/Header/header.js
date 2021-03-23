@@ -19,7 +19,7 @@ const Header = ({
     changeModalInner(inputType);
     openModal();
   };
-console.log(movieDetails)
+
   return (
     <header id="header">
       <div id="top-bar">

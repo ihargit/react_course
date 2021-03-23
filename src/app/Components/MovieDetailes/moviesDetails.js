@@ -3,30 +3,30 @@ import { v4 as uuidv4 } from 'uuid';
 import './style.css';
 import PropTypes from 'prop-types';
 
-const MovieDetails = ({ movieDetails: {
-  url,
-  title,
-  releaseDate,
-  overview,
-  runtime,
-  voteAverage,
-  tagline,
-}}) => {
+const MovieDetails = ({
+  movieDetails: {
+    url,
+    title,
+    releaseDate,
+    overview,
+    runtime,
+    voteAverage,
+    tagline,
+  },
+}) => {
   return (
     <div className="movie-detailes">
       <img className="movie-image" src={url} />
       <div className="movie-description">
-        <div>
+        <div className="movie-detailes-header">
           <p className="movie-title">{title}</p>
-          <div>{voteAverage}</div>
+          <span className="movie-vote">{voteAverage}</span>
         </div>
         <p className="movie-tagline">{tagline}</p>
-        <p>
+        <p className="movie-release">
           {`${String(new Date(releaseDate).getFullYear())}  ${runtime} min`}
         </p>
-        <p>
-          {overview}
-        </p>
+        <p>{overview}</p>
       </div>
     </div>
   );
