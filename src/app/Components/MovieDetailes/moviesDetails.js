@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import './style.css';
 import PropTypes from 'prop-types';
 
-const MovieDetails = ({
+const MovieDetails = ({ movieDetails: {
   url,
   title,
   releaseDate,
@@ -11,7 +11,7 @@ const MovieDetails = ({
   runtime,
   voteAverage,
   tagline,
-}) => {
+}}) => {
   return (
     <div className="movie-detailes">
       <img className="movie-image" src={url} />

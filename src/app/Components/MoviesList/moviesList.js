@@ -28,7 +28,8 @@ const getMoviesToDisplayData = (data) =>
       id,
       overview,
       runtime,
-      vote_average
+      vote_average,
+      tagline
     }) => ({
       url: poster_path || undefined,
       title,
@@ -38,6 +39,7 @@ const getMoviesToDisplayData = (data) =>
       overview,
       runtime,
       voteAverage: vote_average,
+      tagline
     })
   );
 
@@ -66,7 +68,9 @@ const MoviesList = ({
   openModal,
   closeModal,
   changeModalInner,
-  changeShowMovieDescription
+  changeShowMovieDescription,
+  changeMovieDetails,
+  movieDetails
 }) => {
   const moviesToDisplay = getMoviesToDisplay(movies.data, genre, selector);
   const genres = getGenres(moviesToDisplay);
@@ -93,6 +97,8 @@ const MoviesList = ({
           closeModal={closeModal}
           changeModalInner={changeModalInner}
           changeShowMovieDescription={changeShowMovieDescription}
+          changeMovieDetails={changeMovieDetails}
+          movieDetailes={movieDetails}
         />
       </div>
     </>

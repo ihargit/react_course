@@ -27,6 +27,15 @@ export default function Page() {
   const [isOpen, changeIsOpen] = useState(false);
   const [modalInner, changeModalInner] = useState(() => {});
   const [showMovieDescription, changeShowMovieDescription] = useState(false);
+  const [movieDetails, changeMovieDetails] = useState({
+    url: '',
+    title: '',
+    releaseDate: '',
+    overview: '',
+    runtime: '',
+    voteAverage: '',
+    tagline: '',
+  });
 
   const onModalOpen = () => {
     changeIsOpen(true);
@@ -44,6 +53,7 @@ export default function Page() {
         genresPossible={genresPossible}
         showMovieDescription={showMovieDescription}
         changeShowMovieDescription={changeShowMovieDescription}
+        movieDetails={movieDetails}
       />
       <MoviesList
         movies={movies}
@@ -58,6 +68,8 @@ export default function Page() {
         closeModal={onModalClose}
         changeModalInner={changeModalInner}
         changeShowMovieDescription={changeShowMovieDescription}
+        changeMovieDetails={changeMovieDetails}
+        movieDetails={movieDetails}
       />
       <ModalWrap isOpen={isOpen} onClose={onModalClose}>
         <>{modalInner}</>

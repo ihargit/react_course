@@ -11,14 +11,15 @@ const Header = ({
   changeModalInner,
   genresPossible,
   showMovieDescription,
-  changeShowMovieDescription
+  changeShowMovieDescription,
+  movieDetails
 }) => {
   const addInput = getAddModalInput(genresPossible, closeModal);
   const prepareModal = (inputType) => () => {
     changeModalInner(inputType);
     openModal();
   };
-
+console.log(movieDetails)
   return (
     <header id="header">
       <div id="top-bar">
@@ -34,7 +35,7 @@ const Header = ({
           <button onClick={prepareModal(addInput)}>+ ADD MOVIE</button>
         )}
       </div>
-      {showMovieDescription ? <MovieDetails /> : <Search />}
+      {showMovieDescription ? <MovieDetails movieDetails={movieDetails}/> : <Search />}
     </header>
   );
 };

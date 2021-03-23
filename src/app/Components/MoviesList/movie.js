@@ -20,7 +20,10 @@ const Movie = ({
   overview,
   runtime,
   voteAverage,
+  tagline,
   changeShowMovieDescription,
+  changeMovieDetails,
+  movieDetails,
 }) => {
   const [hidden, setHidden] = useState('hide');
   const toggleHidden = () => setHidden(hidden ? '' : 'hide');
@@ -45,7 +48,19 @@ const Movie = ({
 
   const movieEl = useRef();
   const onEvent = (e) => {
-    if (movieEl.current.contains(e.target)) {
+    if (movieEl.current.contains(e.target) && e.target.className === 'movie-image') {
+      changeMovieDetails((prevState) => ({
+        ...prevState,
+        ... {
+          url,
+          title,
+          releaseDate,
+          overview,
+          runtime,
+          voteAverage,
+          tagline,
+        },
+      }));
       changeShowMovieDescription(true);
     }
   };
