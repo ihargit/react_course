@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import './style.css';
 import PropTypes from 'prop-types';
-import ErrorBoundary from '../ErrorBoundary';
 import Movies from './movies';
 import ModalWrap from '../ModalWrap';
 import { editAddModalInput, getDeleteModalInput } from './moviesModalsInputs';
@@ -47,10 +46,13 @@ const Movie = ({
 
   const movieEl = useRef();
   const onEvent = (e) => {
-    if (movieEl.current.contains(e.target) && e.target.className === 'movie-image') {
+    if (
+      movieEl.current.contains(e.target) &&
+      e.target.className === 'movie-image'
+    ) {
       changeMovieDetails((prevState) => ({
         ...prevState,
-        ... {
+        ...{
           url,
           title,
           releaseDate,
@@ -69,33 +71,31 @@ const Movie = ({
   }, [onEvent]);
 
   return (
-    <ErrorBoundary>
-      <div className="movie" ref={movieEl}>
-        <button
-          className="movie-three-dots-icon hide"
-          onClick={toggleHidden}
-        ></button>
-        <div className={`movie-three-dots-menu ${hidden}`}>
-          <button className="close-menu-button" onClick={toggleHidden}>
-            x
-          </button>
-          <button className="edit-button" onClick={prepareModal(editInput)}>
-            Edit
-          </button>
-          <button className="delete-button" onClick={prepareModal(deleteInput)}>
-            Delete
-          </button>
-        </div>
-        <img className="movie-image" src={url} />
-        <div className="movie-description">
-          <p className="movie-title">{title}</p>
-          <div className="movie-release-date">
-            {String(new Date(releaseDate).getFullYear())}
-          </div>
-        </div>
-        <p className="movie-genre">{genre}</p>
+    <div className="movie" ref={movieEl}>
+      <button
+        className="movie-three-dots-icon hide"
+        onClick={toggleHidden}
+      ></button>
+      <div className={`movie-three-dots-menu ${hidden}`}>
+        <button className="close-menu-button" onClick={toggleHidden}>
+          x
+        </button>
+        <button className="edit-button" onClick={prepareModal(editInput)}>
+          Edit
+        </button>
+        <button className="delete-button" onClick={prepareModal(deleteInput)}>
+          Delete
+        </button>
       </div>
-    </ErrorBoundary>
+      <img className="movie-image" src={url} />
+      <div className="movie-description">
+        <p className="movie-title">{title}</p>
+        <div className="movie-release-date">
+          {String(new Date(releaseDate).getFullYear())}
+        </div>
+      </div>
+      <p className="movie-genre">{genre}</p>
+    </div>
   );
 };
 
