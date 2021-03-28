@@ -43,12 +43,8 @@ const MovieCard = ({
     openModal();
   };
 
-  const movieEl = useRef();
-  const onEvent = (e) => {
-    if (
-      movieEl.current.contains(e.target) &&
-      e.target.className === 'movie-image'
-    ) {
+  const changeMovieDetailsCallback = ({ target: { className } }) => {
+    if (className === 'movie-image') {
       changeMovieDetails((prevState) => ({
         ...prevState,
         ...{
@@ -64,13 +60,9 @@ const MovieCard = ({
       changeShowMovieDescription(true);
     }
   };
-  useEffect(() => {
-    window.addEventListener('mouseup', onEvent);
-    return () => window.removeEventListener('mouseup', onEvent);
-  }, [onEvent]);
 
   return (
-    <div className="movie" ref={movieEl}>
+    <div className="movie" onClick={changeMovieDetailsCallback}>
       <button
         className="movie-three-dots-icon hide"
         onClick={toggleHidden}
