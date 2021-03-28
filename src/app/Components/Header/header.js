@@ -4,40 +4,55 @@ import './style.css';
 import Search from '../Search';
 import MovieDetails from '../MovieDetails';
 import getAddModalInput from './addMovieInput';
-import { GENRES_POSSIBLE, ICONS_CODES} from '../../Constants';
+import { GENRES_POSSIBLE, ICONS_CODES } from '../../Constants';
+import ModalWrap from '../../Components/ModalWrap';
 
 const Header = ({
-  openModal,
-  closeModal,
-  changeModalInner,
   genresPossible,
   showMovieDescription,
   changeShowMovieDescription,
-  movieDetails
+  movieDetails,
 }) => {
-  const addInput = getAddModalInput(GENRES_POSSIBLE, closeModal);
+  const onModalOpen = () => {
+    changeIsOpen(true);
+  };
+  const onModalClose = () => {
+    changeIsOpen(false);
+  };
+  const addInput = getAddModalInput(GENRES_POSSIBLE, onModalClose);
+  const [isOpen, changeIsOpen] = useState(false);
+  const [modalInner, changeModalInner] = useState(() => {});
   const prepareModal = (inputType) => () => {
     changeModalInner(inputType);
-    openModal();
+    onModalOpen();
   };
 
   return (
-    <header id="header">
-      <div id="top-bar">
-        <img src="" alt="netflix_roulette" />
+    <>
+      <header id="header">
+        <div id="top-bar">
+          <img src="" alt="netflix_roulette" />
+          {showMovieDescription ? (
+            <button
+              id="search-icon"
+              onClick={() => changeShowMovieDescription(!showMovieDescription)}
+            >
+              {ICONS_CODES.SEARCH}
+            </button>
+          ) : (
+            <button onClick={prepareModal(addInput)}>+ ADD MOVIE</button>
+          )}
+        </div>
         {showMovieDescription ? (
-          <button
-            id="search-icon"
-            onClick={() => changeShowMovieDescription(!showMovieDescription)}
-          >
-            {ICONS_CODES.SEARCH}
-          </button>
+          <MovieDetails movieDetails={movieDetails} />
         ) : (
-          <button onClick={prepareModal(addInput)}>+ ADD MOVIE</button>
+          <Search />
         )}
-      </div>
-      {showMovieDescription ? <MovieDetails movieDetails={movieDetails}/> : <Search />}
-    </header>
+      </header>
+      <ModalWrap isOpen={isOpen} onClose={onModalClose}>
+        <>{modalInner}</>
+      </ModalWrap>
+    </>
   );
 };
 

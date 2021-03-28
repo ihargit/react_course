@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import MoviesGenres from './genres';
 import MoviesFound from './moviesFound';
 import SortBySelector from './sortSelector';
 import Movies from './movies';
-import { getGenres, getMoviesToDisplayData, getMoviesToDisplay } from '../../Utils';
+import ModalWrap from '../../Components/ModalWrap';
+import {
+  getGenres,
+  getMoviesToDisplayData,
+  getMoviesToDisplay,
+} from '../../Utils';
 
 const MoviesList = ({
   movies,
@@ -13,17 +18,22 @@ const MoviesList = ({
   selector,
   setSelector,
   selectors,
-  openModal,
-  closeModal,
-  changeModalInner,
   changeShowMovieDescription,
   changeMovieDetails,
-  movieDetails
+  movieDetails,
 }) => {
   const moviesToDisplay = getMoviesToDisplay(movies.data, genre, selector);
   const genres = getGenres(moviesToDisplay);
   const moviesNumber = moviesToDisplay.length;
   const moviesToDisplayData = getMoviesToDisplayData(moviesToDisplay);
+  const onModalOpen = () => {
+    changeIsOpen(true);
+  };
+  const onModalClose = () => {
+    changeIsOpen(false);
+  };
+  const [isOpen, changeIsOpen] = useState(false);
+  const [modalInner, changeModalInner] = useState(() => {});
   return (
     <>
       <div className="container-padding flex">
@@ -40,14 +50,17 @@ const MoviesList = ({
       <div className="container-padding flex-grow-10">
         <Movies
           data={moviesToDisplayData}
-          openModal={openModal}
-          closeModal={closeModal}
+          openModal={onModalOpen}
+          closeModal={onModalClose}
           changeModalInner={changeModalInner}
           changeShowMovieDescription={changeShowMovieDescription}
           changeMovieDetails={changeMovieDetails}
           movieDetails={movieDetails}
         />
       </div>
+      <ModalWrap isOpen={isOpen} onClose={onModalClose}>
+        <>{modalInner}</>
+      </ModalWrap>
     </>
   );
 };
