@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 
 const MoviesGenres = ({ genres, selected, setGenre }) => {
   const handleClick = (e) => {
@@ -10,7 +10,7 @@ const MoviesGenres = ({ genres, selected, setGenre }) => {
   const getClassName = (genre) =>
     `genre-button${genre === selected ? ' genre-button-selected' : ''}`;
   const genresList = genres.map((genre) => (
-    <li key={uuidv4()}>
+    <li key={uuidV4()}>
       <button className={getClassName(genre)} onClick={handleClick} value={genre}>{genre}</button>
     </li>
   ));

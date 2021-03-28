@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 import './style.css';
-import Movie from './movie';
+import MovieCard from '../MovieCard';
 
 const Movies = ({
   data,
-  genresPossible,
   openModal,
   closeModal,
   changeModalInner,
+  changeShowMovieDescription,
+  changeMovieDetails,
+  movieDetails
 }) => {
 
   return (
@@ -22,10 +24,12 @@ const Movies = ({
           id,
           overview,
           runtime,
+          voteAverage,
+          tagline,
         } = movieData;
         return (
-          <Movie
-            key={uuidv4()}
+          <MovieCard
+            key={uuidV4()}
             url={url}
             title={title}
             id={id}
@@ -36,7 +40,11 @@ const Movies = ({
             openModal={openModal}
             closeModal={closeModal}
             changeModalInner={changeModalInner}
-            genresPossible={genresPossible}
+            voteAverage={voteAverage}
+            tagline={tagline}
+            changeShowMovieDescription={changeShowMovieDescription}
+            changeMovieDetails={changeMovieDetails}
+            movieDetails={movieDetails}
           />
         );
       })}

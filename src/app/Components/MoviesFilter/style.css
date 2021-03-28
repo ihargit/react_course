@@ -1,0 +1,67 @@
+.container-padding {
+  padding: 0em 2em;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#genre-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-inline-start: 0;
+  margin-block-end: 0px;
+  margin-block-start: 0px;
+  margin-top: 7px;
+}
+#genre-selector li {
+  display: inline-block;
+  padding-right: 1em;
+}
+
+.genre-button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+
+.genre-button:hover {
+  border-bottom: 1px solid red
+}
+
+.genre-button-selected {
+  margin-right: 0px;
+  border-bottom: 1px solid red
+}
+
+.movies-sort-selector {
+  font-size: 0.8em;
+  margin: auto;
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-top: 15px;
+}
+
+.movies-sort-selector label{
+  padding-right: 1em;
+}
+
+.movies-sort-selector select{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  text-transform: uppercase;
+}
