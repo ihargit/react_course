@@ -3,7 +3,7 @@ import './style.css';
 
 const Footer = (props) => (
   <footer className="footer">
-    <img src="" alt="netflixroulette" />
+    <img src="" alt="netflix_roulette" />
     <>{props.children}</>
   </footer>
 );

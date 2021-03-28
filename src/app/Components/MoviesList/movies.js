@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 import './style.css';
 import Movie from './movie';
 
 const Movies = ({
   data,
-  genresPossible,
   openModal,
   closeModal,
   changeModalInner,
@@ -30,7 +29,7 @@ const Movies = ({
         } = movieData;
         return (
           <Movie
-            key={uuidv4()}
+            key={uuidV4()}
             url={url}
             title={title}
             id={id}
@@ -41,7 +40,6 @@ const Movies = ({
             openModal={openModal}
             closeModal={closeModal}
             changeModalInner={changeModalInner}
-            genresPossible={genresPossible}
             voteAverage={voteAverage}
             tagline={tagline}
             changeShowMovieDescription={changeShowMovieDescription}

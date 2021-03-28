@@ -1,11 +1,11 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import './style.css';
 import PropTypes from 'prop-types';
 import ErrorBoundary from '../ErrorBoundary';
 import Movies from './movies';
 import ModalWrap from '../ModalWrap';
 import { editAddModalInput, getDeleteModalInput } from './moviesModalsInputs';
+import { GENRES_POSSIBLE } from '../../Constants';
 
 const Movie = ({
   url,
@@ -16,7 +16,6 @@ const Movie = ({
   openModal,
   closeModal,
   changeModalInner,
-  genresPossible,
   overview,
   runtime,
   voteAverage,
@@ -34,7 +33,7 @@ const Movie = ({
     id,
     releaseDate,
     closeModal,
-    genresPossible,
+    genresPossible: GENRES_POSSIBLE,
     overview,
     runtime,
   });

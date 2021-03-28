@@ -5,37 +5,17 @@ import MoviesList from '../../Components/MoviesList';
 import Footer from '../../Components/Footer';
 import * as allMovies from './movies.json';
 import ModalWrap from '../../Components/ModalWrap';
+import { DEFAULT_GENRE, DEFAULT_MOVIE_DETAILS, SELECTORS } from '../../Constants';
 
 export default function Page() {
-  const defaultGenre = 'all';
-  const selectors = [
-    { value: 'release_date', view: 'release date' },
-    { value: 'budget', view: 'budget' },
-    { value: 'vote_average', view: 'vote average' },
-    { value: 'vote_count', view: 'vote count' },
-    { value: 'revenue', view: 'revenue' },
-  ];
-  const genresPossible = [
-    { value: 'comedy', view: 'comedy' },
-    { value: 'drama', view: 'drama' },
-    { value: 'romance', view: 'romance' },
-  ];
   const [movies, setMovies] = useState(allMovies);
-  const [genreToSelect, setGenre] = useState(defaultGenre);
-  const [selector, setSelector] = useState(selectors[0].value);
+  const [genreToSelect, setGenre] = useState(DEFAULT_GENRE);
+  const [selector, setSelector] = useState(SELECTORS[0].value);
 
   const [isOpen, changeIsOpen] = useState(false);
   const [modalInner, changeModalInner] = useState(() => {});
   const [showMovieDescription, changeShowMovieDescription] = useState(false);
-  const [movieDetails, changeMovieDetails] = useState({
-    url: '',
-    title: '',
-    releaseDate: '',
-    overview: '',
-    runtime: '',
-    voteAverage: '',
-    tagline: '',
-  });
+  const [movieDetails, changeMovieDetails] = useState(DEFAULT_MOVIE_DETAILS);
 
   const onModalOpen = () => {
     changeIsOpen(true);
@@ -50,7 +30,6 @@ export default function Page() {
         openModal={onModalOpen}
         closeModal={onModalClose}
         changeModalInner={changeModalInner}
-        genresPossible={genresPossible}
         showMovieDescription={showMovieDescription}
         changeShowMovieDescription={changeShowMovieDescription}
         movieDetails={movieDetails}
@@ -60,10 +39,9 @@ export default function Page() {
         setMovies={setMovies}
         genre={genreToSelect}
         setGenre={setGenre}
-        selectors={selectors}
+        selectors={SELECTORS}
         selector={selector}
         setSelector={setSelector}
-        genresPossible={genresPossible}
         openModal={onModalOpen}
         closeModal={onModalClose}
         changeModalInner={changeModalInner}

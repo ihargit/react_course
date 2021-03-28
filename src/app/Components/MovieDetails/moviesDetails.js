@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 import './style.css';
 import PropTypes from 'prop-types';
 
@@ -15,10 +15,10 @@ const MovieDetails = ({
   },
 }) => {
   return (
-    <div className="movie-detailes">
+    <div className="movie-details">
       <img className="movie-image" src={url} />
       <div className="movie-description">
-        <div className="movie-detailes-header">
+        <div className="movie-details-header">
           <p className="movie-title">{title}</p>
           <span className="movie-vote">{voteAverage}</span>
         </div>

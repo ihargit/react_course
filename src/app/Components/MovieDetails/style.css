@@ -1,14 +1,14 @@
-.movie-detailes {
+.movie-details {
   display: flex;
   margin-bottom: 10px;
 }
 
-.movie-detailes .movie-image {
+.movie-details .movie-image {
   height: 100px;
   width: 35px;
 }
 
-.movie-detailes .movie-description {
+.movie-details .movie-description {
   margin: 20px 30px;
   display: flex;
   align-content: center;
@@ -17,7 +17,7 @@
   justify-content: center;
 }
 
-.movie-detailes-header {
+.movie-details-header {
   display: flex;
   align-items: center;
   height: fit-content;
@@ -25,11 +25,11 @@
   margin-bottom: -2.5em;
 }
 
-.movie-detailes-header .movie-title {
+.movie-details-header .movie-title {
   display: inline;
 }
 
-.movie-detailes-header .movie-vote {
+.movie-details-header .movie-vote {
   width: 3em;
   height: 3em;
   font-size: 1rem;
@@ -42,7 +42,7 @@
   color: green;
 }
 
-.movie-detailes-header .movie-title {
+.movie-details-header .movie-title {
   font-size: 2em;
   color: white;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 
 function editAddModalInput({
   url,
@@ -49,7 +49,7 @@ function editAddModalInput({
           onChange={() => {}}
         >
           {genresPossible.map(({ value, view }) => (
-            <option value={value} key={uuidv4()}>
+            <option value={value} key={uuidV4()}>
               {view}
             </option>
           ))}

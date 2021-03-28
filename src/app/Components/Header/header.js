@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 import './style.css';
 import Search from '../Search';
-import MovieDetails from '../MovieDetailes';
+import MovieDetails from '../MovieDetails';
 import getAddModalInput from './addMovieInput';
+import { GENRES_POSSIBLE, ICONS_CODES} from '../../Constants';
 
 const Header = ({
   openModal,
@@ -14,7 +15,7 @@ const Header = ({
   changeShowMovieDescription,
   movieDetails
 }) => {
-  const addInput = getAddModalInput(genresPossible, closeModal);
+  const addInput = getAddModalInput(GENRES_POSSIBLE, closeModal);
   const prepareModal = (inputType) => () => {
     changeModalInner(inputType);
     openModal();
@@ -23,13 +24,13 @@ const Header = ({
   return (
     <header id="header">
       <div id="top-bar">
-        <img src="" alt="netflixroulette" />
+        <img src="" alt="netflix_roulette" />
         {showMovieDescription ? (
           <button
             id="search-icon"
             onClick={() => changeShowMovieDescription(!showMovieDescription)}
           >
-            {'\u2315'}
+            {ICONS_CODES.SEARCH}
           </button>
         ) : (
           <button onClick={prepareModal(addInput)}>+ ADD MOVIE</button>

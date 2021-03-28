@@ -1,5 +1,5 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 
 export default function getAddModalInput(genresPossible, closeModal) {
   return () => (
@@ -22,7 +22,7 @@ export default function getAddModalInput(genresPossible, closeModal) {
         <br />
         <select id="genre" name="genre" onChange={() => {}}>
           {genresPossible.map(({ value, view }) => (
-            <option value={value} key={uuidv4()}>
+            <option value={value} key={uuidV4()}>
               {view}
             </option>
           ))}

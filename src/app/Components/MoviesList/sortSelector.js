@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidV4 } from 'uuid';
 
 const SortBySelector = ({ setSelector, selectors, selector }) => {
   const onChange = (e) => {
@@ -12,7 +12,7 @@ const SortBySelector = ({ setSelector, selectors, selector }) => {
       <label>SORT BY</label>
       <select id="sortBy" value={selector} name="sort" onChange={onChange}>
         {selectors.map(({ value, view }) => (
-          <option value={value} key={uuidv4()}>
+          <option value={value} key={uuidV4()}>
             {view}
           </option>
         ))}
