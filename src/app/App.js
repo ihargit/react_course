@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <ErrorBoundary>
-        <Page />
+        <Page/>
       </ErrorBoundary>
     );
   }

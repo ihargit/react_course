@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import './style.css';
-import Header from '../../Components/Header';
-import MoviesList from '../../Components/MoviesList';
-import Footer from '../../Components/Footer';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as allMovies from './movies.json';
-import { DEFAULT_GENRE, DEFAULT_MOVIE_DETAILS, SELECTORS } from '../../Constants';
+import Movies from '../../Pages/Movies';
+import Movie from '../../Pages/Movie';
+import {
+  DEFAULT_GENRE,
+  DEFAULT_MOVIE_DETAILS,
+  SELECTORS,
+} from '../../Constants';
 import {
   getGenres,
   getMoviesToDisplayData,
@@ -18,32 +21,41 @@ export default function Page() {
   const [showMovieDescription, changeShowMovieDescription] = useState(false);
   const [movieDetails, changeMovieDetails] = useState(DEFAULT_MOVIE_DETAILS);
 
-  const moviesToDisplay = getMoviesToDisplay(movies.data, genreToSelect, selector);
-  const genres = getGenres(moviesToDisplay);
+  const moviesToDisplay = getMoviesToDisplay(
+    movies.data,
+    genreToSelect,
+    selector
+  );
+  const genresAmongSelectedMovies = getGenres(moviesToDisplay);
   const moviesNumber = moviesToDisplay.length;
   const moviesToDisplayData = getMoviesToDisplayData(moviesToDisplay);
+  const moviesProps = {
+    showMovieDescription,
+    changeShowMovieDescription,
+    moviesData: moviesToDisplayData,
+    genres: genresAmongSelectedMovies,
+    moviesNumber,
+    setMovies,
+    genre: genreToSelect,
+    setGenre,
+    selector,
+    setSelector,
+    changeMovieDetails,
+    movieDetails,
+  };
 
   return (
     <>
-      <Header
-        showMovieDescription={showMovieDescription}
-        changeShowMovieDescription={changeShowMovieDescription}
-        movieDetails={movieDetails}
-      />
-      <MoviesList
-        moviesData={moviesToDisplayData}
-        genres={genres}
-        moviesNumber={moviesNumber}
-        setMovies={setMovies}
-        genre={genreToSelect}
-        setGenre={setGenre}
-        selector={selector}
-        setSelector={setSelector}
-        changeShowMovieDescription={changeShowMovieDescription}
-        changeMovieDetails={changeMovieDetails}
-        movieDetails={movieDetails}
-      />
-      <Footer />
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Movies {...moviesProps} />
+          </Route>
+          <Route path="/movie" exact>
+            <Movie {...moviesProps} />
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 }

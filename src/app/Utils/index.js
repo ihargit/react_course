@@ -22,7 +22,7 @@ const getMoviesToDisplayData = (data) =>
       overview,
       runtime,
       vote_average,
-      tagline
+      tagline,
     }) => ({
       url: poster_path || undefined,
       title,
@@ -32,7 +32,7 @@ const getMoviesToDisplayData = (data) =>
       overview,
       runtime,
       voteAverage: vote_average,
-      tagline
+      tagline,
     })
   );
 
@@ -50,4 +50,4 @@ const getMoviesToDisplay = (moviesData, genre = 'all', selector) => {
     .sort((a, b) => b[selector] - a[selector]);
 };
 
-export { getGenres, getMoviesToDisplayData, getMoviesToDisplay};
+export { getGenres, getMoviesToDisplayData, getMoviesToDisplay };
