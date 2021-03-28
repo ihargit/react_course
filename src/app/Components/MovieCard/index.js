@@ -1,12 +1,11 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import './style.css';
 import PropTypes from 'prop-types';
-import Movies from './movies';
 import ModalWrap from '../ModalWrap';
 import { editAddModalInput, getDeleteModalInput } from './moviesModalsInputs';
 import { GENRES_POSSIBLE } from '../../Constants';
 
-const Movie = ({
+const MovieCard = ({
   url,
   title,
   genre,
@@ -99,17 +98,17 @@ const Movie = ({
   );
 };
 
-Movie.propTypes = {
+MovieCard.propTypes = {
   title: PropTypes.string,
   genre: PropTypes.string,
   releaseDate: PropTypes.string,
 };
 
-Movie.defaultProps = {
+MovieCard.defaultProps = {
   url: 'url',
   title: 'Some title',
   genre: 'Some genre',
   releaseDate: '2022',
 };
 
-export default Movie;
+export default MovieCard;

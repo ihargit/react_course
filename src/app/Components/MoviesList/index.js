@@ -5,6 +5,7 @@ import Movies from './movies';
 import ModalWrap from '../ModalWrap';
 import MoviesFilter from '../MoviesFilter';
 
+
 const MoviesList = ({
   moviesData,
   genres,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import './style.css';
-import Movie from './movie';
+import MovieCard from '../MovieCard';
 
 const Movies = ({
   data,
@@ -28,7 +28,7 @@ const Movies = ({
           tagline,
         } = movieData;
         return (
-          <Movie
+          <MovieCard
             key={uuidV4()}
             url={url}
             title={title}
