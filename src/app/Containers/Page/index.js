@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import * as allMovies from './movies.json';
-import Movies from '../../Pages/Movies';
 import Movie from '../../Pages/Movie';
+import Movies from '../../Pages/Movies';
 import {
   DEFAULT_GENRE,
   DEFAULT_MOVIE_DETAILS,
@@ -14,7 +14,11 @@ import {
   getMoviesToDisplay,
 } from '../../Utils';
 
-export default function Page() {
+const mapStateToPage = ({ movies }) => {
+  return { allMovies: movies };
+}
+
+function Page({ allMovies }) {
   const [movies, setMovies] = useState(allMovies);
   const [genreToSelect, setGenre] = useState(DEFAULT_GENRE);
   const [selector, setSelector] = useState(SELECTORS[0].value);
@@ -35,7 +39,6 @@ export default function Page() {
     moviesData: moviesToDisplayData,
     genres: genresAmongSelectedMovies,
     moviesNumber,
-    setMovies,
     genre: genreToSelect,
     setGenre,
     selector,
@@ -59,3 +62,5 @@ export default function Page() {
     </>
   );
 }
+
+export default connect(mapStateToPage)(Page);
