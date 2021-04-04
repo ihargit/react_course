@@ -7,16 +7,16 @@ import {
   DEFAULT_GENRE,
   DEFAULT_MOVIE_DETAILS,
   SELECTORS,
+  GENRES,
 } from '../../Constants';
 import {
-  getGenres,
   getMoviesToDisplayData,
   getMoviesToDisplay,
 } from '../../Utils';
 
 const mapStateToPage = ({ movies }) => {
   return { movies };
-}
+};
 
 function Page({ movies }) {
   // const [movies, setMovies] = useState(allMovies); // TODO setMovies
@@ -30,14 +30,14 @@ function Page({ movies }) {
     genreToSelect,
     selector
   );
-  const genresAmongSelectedMovies = getGenres(moviesToDisplay);
+
   const moviesNumber = moviesToDisplay.length;
   const moviesToDisplayData = getMoviesToDisplayData(moviesToDisplay);
   const moviesProps = {
     showMovieDescription,
     changeShowMovieDescription,
     moviesData: moviesToDisplayData,
-    genres: genresAmongSelectedMovies,
+    genres: GENRES,
     moviesNumber,
     genre: genreToSelect,
     setGenre,

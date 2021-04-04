@@ -22,10 +22,14 @@ const DEFAULT_MOVIE_DETAILS = {
   tagline: '',
 };
 
+const GENRES = [
+  'all', 'action', 'adventure', 'animation', 'comedy', 'crime', 'documentary', 'drama', 'family', 'fantasy', 'history', 'horror', 'music', 'mystery', 'romance', 'science fiction', 'thriller', 'tv movie', 'war', 'western'
+]
+
 const ICONS_CODES = {
   SEARCH: '\u2315'
 }
 
 const DEFAULT_GENRE = 'all';
 
-export { GENRES_POSSIBLE, SELECTORS, DEFAULT_GENRE, DEFAULT_MOVIE_DETAILS, ICONS_CODES };
+export { GENRES_POSSIBLE, SELECTORS, DEFAULT_GENRE, DEFAULT_MOVIE_DETAILS, ICONS_CODES, GENRES };
