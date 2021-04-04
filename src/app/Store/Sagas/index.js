@@ -1,16 +1,18 @@
 import 'regenerator-runtime/runtime';
 import React from 'react';
-import { put, takeEvery, all } from 'redux-saga/effects';
+import { put, takeEvery, all, call, takeLatest } from 'redux-saga/effects';
+import * as Api from '../../Api';
 
-export function* getMovies() {
-  yield put({ type: 'GET_MOVIES' });
-}
-
-export function* watchGetMovies() {
-  yield takeEvery('USER_FETCH_REQUESTED', getMovies);
+function* fetchMovies() {
+  try {
+    const movies = yield call(Api.getMovies);
+    yield put({ type: 'MOVIES_FETCH_SUCCEEDED', payload: movies });
+  } catch(e) {
+    yield put({ type: 'MOVIES_FETCH_FAILED', payload: e.message });
+  }
 }
 
 export default function* rootSaga() {
-  yield put({ type: 'USER_FETCH_REQUESTED' });
-  yield all([watchGetMovies()]);
+  yield takeLatest("MOVIES_FETCH_REQUESTED", fetchMovies);
+  yield put({ type: 'MOVIES_FETCH_REQUESTED' });
 }

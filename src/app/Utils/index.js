@@ -1,5 +1,5 @@
 const getGenres = (moviesData) => {
-  const allGenres = { all: true };
+  const allGenres = {};
   moviesData.forEach(({ genres }) =>
     (genres || []).forEach((genre) => {
       const genreLower = genre.toLowerCase();
@@ -8,7 +8,7 @@ const getGenres = (moviesData) => {
       }
     })
   );
-  return Object.keys(allGenres).sort();
+  return ['all'].concat(Object.keys(allGenres).sort());
 };
 
 const getMoviesToDisplayData = (data) =>

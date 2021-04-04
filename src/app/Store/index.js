@@ -1,21 +1,15 @@
 import React from 'react';
-import { createStore } from 'redux';
-import * as allMovies from '../../movies.json';
+import { createStore, applyMiddleware } from 'redux';
+import createSagasMiddleware from 'redux-saga';
 
 import rootReducer from './Reducers';
+import rootSaga from './Sagas';
+import * as allMovies from '../../movies.json';
 
-const store = createStore(rootReducer, { movies: allMovies });
+const initState = { movies: allMovies };
+
+const sagaMiddleware = createSagasMiddleware();
+const store = createStore(rootReducer, initState, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
 
 export default store;
-// import React from 'react';
-// import { createStore, applyMiddleware } from 'redux';
-// import createSagasMiddleware from 'redux-saga';
-
-// import rootReducer from './Reducers';
-// import rootSaga from './Sagas';
-
-// const sagaMiddleware = createSagasMiddleware();
-// const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-// sagaMiddleware.run(rootSaga);
-
-// export default store;

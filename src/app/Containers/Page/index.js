@@ -15,11 +15,11 @@ import {
 } from '../../Utils';
 
 const mapStateToPage = ({ movies }) => {
-  return { allMovies: movies };
+  return { movies };
 }
 
-function Page({ allMovies }) {
-  const [movies, setMovies] = useState(allMovies);
+function Page({ movies }) {
+  // const [movies, setMovies] = useState(allMovies); // TODO setMovies
   const [genreToSelect, setGenre] = useState(DEFAULT_GENRE);
   const [selector, setSelector] = useState(SELECTORS[0].value);
   const [showMovieDescription, changeShowMovieDescription] = useState(false);
