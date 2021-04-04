@@ -9,7 +9,7 @@ const MoviesGenres = ({ genres, selected, setGenre }) => {
   }
   const getClassName = (genre) =>
     `genre-button${genre === selected ? ' genre-button-selected' : ''}`;
-  const genresList = genres.map((genre) => (
+  const genresList = Object.values(genres).map((genre) => (
     <li key={uuidV4()}>
       <button className={getClassName(genre)} onClick={handleClick} value={genre}>{genre}</button>
     </li>

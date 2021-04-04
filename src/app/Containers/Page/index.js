@@ -3,31 +3,18 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Movie from '../../Pages/Movie';
 import Movies from '../../Pages/Movies';
-import {
-  DEFAULT_GENRE,
-  DEFAULT_MOVIE_DETAILS,
-  SELECTORS,
-  GENRES,
-} from '../../Constants';
-import {
-  getMoviesToDisplayData,
-  getMoviesToDisplay,
-} from '../../Utils';
+import { DEFAULT_MOVIE_DETAILS } from '../../Constants';
+import { getMoviesToDisplayData, getMoviesToDisplay } from '../../Utils';
 
-const mapStateToPage = ({ movies }) => {
-  return { movies };
-};
-
-function Page({ movies }) {
-  // const [movies, setMovies] = useState(allMovies); // TODO setMovies
-  const [genreToSelect, setGenre] = useState(DEFAULT_GENRE);
-  const [selector, setSelector] = useState(SELECTORS[0].value);
+function Page({ movies, filter }) {
+  const { genres, genre, selector } = filter;
   const [showMovieDescription, changeShowMovieDescription] = useState(false);
   const [movieDetails, changeMovieDetails] = useState(DEFAULT_MOVIE_DETAILS);
 
   const moviesToDisplay = getMoviesToDisplay(
+    //TODO delete
     movies.data,
-    genreToSelect,
+    genre,
     selector
   );
 
@@ -37,12 +24,7 @@ function Page({ movies }) {
     showMovieDescription,
     changeShowMovieDescription,
     moviesData: moviesToDisplayData,
-    genres: GENRES,
     moviesNumber,
-    genre: genreToSelect,
-    setGenre,
-    selector,
-    setSelector,
     changeMovieDetails,
     movieDetails,
   };
@@ -63,4 +45,5 @@ function Page({ movies }) {
   );
 }
 
-export default connect(mapStateToPage)(Page);
+const mapState = ({ movies, filter }) => ({ movies, filter });
+export default connect(mapState)(Page);

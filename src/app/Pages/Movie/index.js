@@ -8,7 +8,6 @@ export default function Movie({
   moviesData,
   genres,
   moviesNumber,
-  setMovies,
   genre,
   setGenre,
   selector,
@@ -28,7 +27,6 @@ export default function Movie({
         moviesData={moviesData}
         genres={genres}
         moviesNumber={moviesNumber}
-        setMovies={setMovies}
         genre={genre}
         setGenre={setGenre}
         selector={selector}

@@ -1,17 +1,35 @@
 import 'regenerator-runtime/runtime';
 import React from 'react';
-import { put, takeEvery, all, call, takeLatest } from 'redux-saga/effects';
+import {
+  put,
+  takeEvery,
+  all,
+  call,
+  takeLatest,
+  select,
+} from 'redux-saga/effects';
 import * as Api from '../../Api';
 import { actionTypes } from '../Actions';
 const {
   moviesFetchSucceeded,
   moviesFetchFailed,
   moviesFetchRequested,
+  moviesGenreSet,
+  moviesSortSelectorSet,
 } = actionTypes;
 
-function* fetchMovies(args = {}) {
+function* fetchMovies({ type, payload }) {
   try {
-    const movies = yield call(Api.getMovies, [args]);
+    const { sortBy, sortOrder, filter, limit, offset } = yield select(
+      ({ filter }) => filter
+    );
+    const movies = yield call(Api.getMovies, {
+      sortBy,
+      sortOrder,
+      filter,
+      limit,
+      offset,
+    });
     yield put({ type: moviesFetchSucceeded, payload: movies });
   } catch (e) {
     yield put({ type: moviesFetchFailed, payload: e.message });
@@ -20,5 +38,7 @@ function* fetchMovies(args = {}) {
 
 export default function* rootSaga() {
   yield takeLatest(moviesFetchRequested, fetchMovies);
+  yield takeLatest(moviesGenreSet, fetchMovies);
+  yield takeLatest(moviesSortSelectorSet, fetchMovies);
   yield put({ type: moviesFetchRequested });
 }
