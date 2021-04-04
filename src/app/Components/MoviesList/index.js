@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import './style.css';
 import MoviesFound from './moviesFound';
 import Movies from './movies';
 import ModalWrap from '../ModalWrap';
 import MoviesFilter from '../MoviesFilter';
 
-
 const MoviesList = ({
   moviesData,
-  genres,
-  moviesNumber,
-  genre,
-  setGenre,
-  selector,
-  setSelector,
   changeShowMovieDescription,
   changeMovieDetails,
   movieDetails,
@@ -28,16 +22,9 @@ const MoviesList = ({
   const [modalInner, changeModalInner] = useState(() => {});
   return (
     <>
-      <MoviesFilter
-        genre={genre}
-        genres={genres}
-        selected={genre}
-        setGenre={setGenre}
-        setSelector={setSelector}
-        selector={selector}
-      />
+      <MoviesFilter />
       <div className="container-padding">
-        <MoviesFound number={moviesNumber} />
+        <MoviesFound number={moviesData.length} />
       </div>
       <div className="container-padding flex-grow-10">
         <Movies

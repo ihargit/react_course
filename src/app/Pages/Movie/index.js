@@ -6,12 +6,6 @@ import Footer from '../../Components/Footer';
 export default function Movie({
   showMovieDescription,
   moviesData,
-  genres,
-  moviesNumber,
-  genre,
-  setGenre,
-  selector,
-  setSelector,
   changeShowMovieDescription,
   changeMovieDetails,
   movieDetails,
@@ -25,12 +19,6 @@ export default function Movie({
       />
       <MoviesList
         moviesData={moviesData}
-        genres={genres}
-        moviesNumber={moviesNumber}
-        genre={genre}
-        setGenre={setGenre}
-        selector={selector}
-        setSelector={setSelector}
         changeShowMovieDescription={changeShowMovieDescription}
         changeMovieDetails={changeMovieDetails}
         movieDetails={movieDetails}

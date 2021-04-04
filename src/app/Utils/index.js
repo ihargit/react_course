@@ -11,7 +11,7 @@ const getGenres = (moviesData) => {
   return ['all'].concat(Object.keys(allGenres).sort());
 };
 
-const getMoviesToDisplayData = (data) =>
+const mapMoviesData = (data) =>
   data.map(
     ({
       poster_path,
@@ -26,7 +26,7 @@ const getMoviesToDisplayData = (data) =>
     }) => ({
       url: poster_path || undefined,
       title,
-      genre: genres.join(',') || undefined,
+      genre: genres.join(', ') || undefined,
       releaseDate: release_date || undefined,
       id,
       overview,
@@ -36,18 +36,4 @@ const getMoviesToDisplayData = (data) =>
     })
   );
 
-const getMoviesToDisplay = (moviesData, genre = 'all', selector) => {
-  const genreLower = String(genre).toLowerCase();
-  return moviesData
-    .filter(
-      (movie) =>
-        genreLower === 'all' ||
-        (movie.genres &&
-          !!movie.genres.find(
-            (genreAny) => genreAny.toLowerCase() === genreLower
-          ))
-    )
-    .sort((a, b) => b[selector] - a[selector]);
-};
-
-export { getGenres, getMoviesToDisplayData, getMoviesToDisplay };
+export { getGenres, mapMoviesData };

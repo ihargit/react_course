@@ -23,6 +23,7 @@ function* fetchMovies({ type, payload }) {
     const { sortBy, sortOrder, filter, limit, offset } = yield select(
       ({ filter }) => filter
     );
+    console.log(sortBy, sortOrder, filter, limit, offset)
     const movies = yield call(Api.getMovies, {
       sortBy,
       sortOrder,
