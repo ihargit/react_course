@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ModalWrap from '../../Components/ModalWrap';
+
 import Movie from '../../Pages/Movie';
-import Movies from '../../Pages/Movies';
+import Search from '../../Pages/Search';
 import { DEFAULT_MOVIE_DETAILS } from '../../Constants';
 import { mapMoviesData } from '../../Utils';
 
-function Page({ movies, filter }) {
+function Page({ movies }) {
   const [showMovieDescription, changeShowMovieDescription] = useState(false);
   const [movieDetails, changeMovieDetails] = useState(DEFAULT_MOVIE_DETAILS);
 
@@ -21,19 +23,20 @@ function Page({ movies, filter }) {
 
   return (
     <>
-      <Router>
+      <Router forceRefresh="false">
         <Switch>
-          <Route path="/" exact>
-            <Movies {...moviesProps} />
+          <Route path="/search">
+            <Search {...moviesProps} />
           </Route>
-          <Route path="/movie" exact>
+          <Route path="/film/:id">
             <Movie {...moviesProps} />
           </Route>
         </Switch>
       </Router>
+      <ModalWrap />
     </>
   );
 }
 
-const mapState = ({ movies, filter }) => ({ movies, filter });
+const mapState = ({ movies }) => ({ movies });
 export default connect(mapState)(Page);

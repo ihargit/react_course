@@ -1,47 +1,27 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import PropTypes from 'prop-types';
-import ModalWrap from '../ModalWrap';
-import { editAddModalInput, getDeleteModalInput } from './moviesModalsInputs';
-import { GENRES_POSSIBLE } from '../../Constants';
 
 const MovieCard = ({
-  url,
-  title,
-  genre,
-  id,
-  releaseDate,
-  openModal,
-  closeModal,
-  changeModalInner,
-  overview,
-  runtime,
-  voteAverage,
-  tagline,
+  movieData: {
+    poster_path: url,
+    title,
+    genres = [],
+    release_date: releaseDate,
+    id,
+    overview,
+    runtime,
+    vote_average: voteAverage,
+    tagline,
+  },
   changeShowMovieDescription,
   changeMovieDetails,
   movieDetails,
+  deleteMovie,
+  editMovie,
 }) => {
   const [hidden, setHidden] = useState('hide');
   const toggleHidden = () => setHidden(hidden ? '' : 'hide');
-  const editInput = editAddModalInput({
-    url,
-    title,
-    genre,
-    id,
-    releaseDate,
-    closeModal,
-    genresPossible: GENRES_POSSIBLE,
-    overview,
-    runtime,
-  });
-
-  const deleteInput = getDeleteModalInput({ id, closeModal });
-
-  const prepareModal = (inputType) => () => {
-    changeModalInner(inputType);
-    openModal();
-  };
 
   const changeMovieDetailsCallback = ({ target: { className } }) => {
     if (className === 'movie-image') {
@@ -71,10 +51,10 @@ const MovieCard = ({
         <button className="close-menu-button" onClick={toggleHidden}>
           x
         </button>
-        <button className="edit-button" onClick={prepareModal(editInput)}>
+        <button className="edit-button" onClick={() => editMovie(id)}>
           Edit
         </button>
-        <button className="delete-button" onClick={prepareModal(deleteInput)}>
+        <button className="delete-button" onClick={() => deleteMovie(id)}>
           Delete
         </button>
       </div>
@@ -85,7 +65,7 @@ const MovieCard = ({
           {String(new Date(releaseDate).getFullYear())}
         </div>
       </div>
-      <p className="movie-genre">{genre}</p>
+      <p className="movie-genre">{genres.join(', ')}</p>
     </div>
   );
 };

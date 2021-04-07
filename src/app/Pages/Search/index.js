@@ -3,7 +3,7 @@ import Header from '../../Components/Header';
 import MoviesList from '../../Components/MoviesList';
 import Footer from '../../Components/Footer';
 
-export default function Movies({
+export default function Search({
   showMovieDescription,
   moviesData,
   changeShowMovieDescription,

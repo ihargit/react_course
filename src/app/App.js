@@ -4,14 +4,10 @@ import './App.css';
 import Page from './Containers/Page';
 import ErrorBoundary from './Components/ErrorBoundary';
 
-class App extends Component {
-  render() {
-    return (
-      <ErrorBoundary>
-        <Page/>
-      </ErrorBoundary>
-    );
-  }
-}
+const App = () => (
+  <ErrorBoundary>
+    <Page />
+  </ErrorBoundary>
+);
 
 export default hot(module)(App);

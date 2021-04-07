@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
-export default function getAddModalInput(genres, closeModal) {
+export default function getAddMovieInput(genres, closeModal) {
   return () => (
     <>
       <h4>ADD MOVIE</h4>
@@ -49,7 +49,7 @@ export default function getAddModalInput(genres, closeModal) {
         <button
           className="button red"
           onClick={(id) => {
-            closeModal(); // TODO implement movie add
+            closeModal(); // TODO add new movie
           }}
         >
           SUBMIT

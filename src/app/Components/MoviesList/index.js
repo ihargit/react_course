@@ -3,23 +3,22 @@ import { connect } from 'react-redux';
 import './style.css';
 import MoviesFound from './moviesFound';
 import Movies from './movies';
-import ModalWrap from '../ModalWrap';
 import MoviesFilter from '../MoviesFilter';
+import { MODALS } from '../../Constants';
+import { actionCreators } from '../../Store/Actions';
 
 const MoviesList = ({
   moviesData,
   changeShowMovieDescription,
   changeMovieDetails,
   movieDetails,
+  dispatch,
 }) => {
-  const onModalOpen = () => {
-    changeIsOpen(true);
-  };
-  const onModalClose = () => {
-    changeIsOpen(false);
-  };
-  const [isOpen, changeIsOpen] = useState(false);
-  const [modalInner, changeModalInner] = useState(() => {});
+  const deleteMovie = (id) =>
+    dispatch(actionCreators.showModal({ mode: MODALS.delete, movieId: id }));
+  const editMovie = (id) =>
+    dispatch(actionCreators.showModal({ mode: MODALS.edit, movieId: id }));
+
   return (
     <>
       <MoviesFilter />
@@ -28,20 +27,17 @@ const MoviesList = ({
       </div>
       <div className="container-padding flex-grow-10">
         <Movies
+          deleteMovie={deleteMovie}
+          editMovie={editMovie}
           data={moviesData}
-          openModal={onModalOpen}
-          closeModal={onModalClose}
-          changeModalInner={changeModalInner}
           changeShowMovieDescription={changeShowMovieDescription}
           changeMovieDetails={changeMovieDetails}
           movieDetails={movieDetails}
         />
       </div>
-      <ModalWrap isOpen={isOpen} onClose={onModalClose}>
-        <>{modalInner}</>
-      </ModalWrap>
     </>
   );
 };
 
-export default MoviesList;
+const mapState = ({ modal, movies: { data: moviesData} }) => ({ modal, moviesData });
+export default connect(mapState)(MoviesList);

@@ -1,16 +1,18 @@
 import React from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
-function editAddModalInput({
-  url,
-  title,
-  genre,
-  id,
-  releaseDate,
+export default function getEditMovieInput({
+  movie: {
+    poster_path: url,
+    title,
+    genres: movieGenres,
+    id,
+    release_date: releaseDate,
+    overview,
+    runtime,
+  },
+  genres,
   closeModal,
-  genresPossible,
-  overview,
-  runtime,
 }) {
   return () => (
     <>
@@ -45,12 +47,13 @@ function editAddModalInput({
         <select
           id="genre"
           name="genre"
-          defaultValue={genre}
+          defaultValue={movieGenres}
           onChange={() => {}}
+          multiple
         >
-          {genresPossible.map(({ value, view }) => (
+          {genres.map((value) => (
             <option value={value} key={uuidV4()}>
-              {view}
+              {value}
             </option>
           ))}
         </select>
@@ -86,24 +89,3 @@ function editAddModalInput({
     </>
   );
 }
-
-function getDeleteModalInput({ id, closeModal }) {
-  return () => (
-    <>
-      <p>DELETE MOVIE</p>
-      <p>Are you sure you want to delete this movie?</p>
-      <div className="modal-buttons">
-        <button
-          className="button red"
-          onClick={(id) => {
-            closeModal(); // TODO implement movie deletion
-          }}
-        >
-          CONFIRM
-        </button>
-      </div>
-    </>
-  );
-}
-
-export { editAddModalInput, getDeleteModalInput };

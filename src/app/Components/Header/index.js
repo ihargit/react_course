@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
+import { connect } from 'react-redux';
+
 import './style.css';
 import Search from '../Search';
 import MovieDetails from '../MovieDetails';
 import getAddModalInput from './addMovieInput';
-import { GENRES_POSSIBLE, ICONS_CODES } from '../../Constants';
-import ModalWrap from '../../Components/ModalWrap';
+import { ICONS_CODES, MODALS } from '../../Constants';
+import { actionCreators } from '../../Store/Actions';
+// import ModalWrap from '../../Components/ModalWrap';
 
 const Header = ({
-  genresPossible,
+  filter: { genres },
   showMovieDescription,
   changeShowMovieDescription,
   movieDetails,
+  dispatch,
 }) => {
   const onModalOpen = () => {
     changeIsOpen(true);
@@ -19,13 +23,16 @@ const Header = ({
   const onModalClose = () => {
     changeIsOpen(false);
   };
-  const addInput = getAddModalInput(GENRES_POSSIBLE, onModalClose);
+  const addInput = getAddModalInput(genres, onModalClose);
   const [isOpen, changeIsOpen] = useState(false);
   const [modalInner, changeModalInner] = useState(() => {});
   const prepareModal = (inputType) => () => {
     changeModalInner(inputType);
     onModalOpen();
   };
+
+  const addMovie = () =>
+    dispatch(actionCreators.showModal({ mode: MODALS.add }));
 
   return (
     <>
@@ -40,7 +47,7 @@ const Header = ({
               {ICONS_CODES.SEARCH}
             </button>
           ) : (
-            <button onClick={prepareModal(addInput)}>+ ADD MOVIE</button>
+            <button onClick={addMovie}>+ ADD MOVIE</button>
           )}
         </div>
         {showMovieDescription ? (
@@ -49,11 +56,12 @@ const Header = ({
           <Search />
         )}
       </header>
-      <ModalWrap isOpen={isOpen} onClose={onModalClose}>
+      {/* <ModalWrap isOpen={isOpen} onClose={onModalClose}>
         <>{modalInner}</>
-      </ModalWrap>
+      </ModalWrap> */}
     </>
   );
 };
 
-export default Header;
+const mapState = ({ filter }) => ({ filter });
+export default connect(mapState)(Header);
