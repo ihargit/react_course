@@ -12,4 +12,4 @@ const getGenres = (moviesData) => {
   return ['all'].concat(Object.keys(allGenres).sort());
 };
 
-export { getGenres, mapMoviesData };
+export { getGenres };
