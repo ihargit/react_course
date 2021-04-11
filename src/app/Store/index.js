@@ -25,6 +25,10 @@ const initState = {
     movieId: 0,
     mode: MODALS.add,
   },
+  movie: {
+    isOpen: false,
+    movieId: 0,
+  },
 };
 
 const sagaMiddleware = createSagasMiddleware();

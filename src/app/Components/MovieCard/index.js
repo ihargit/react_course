@@ -14,35 +14,15 @@ const MovieCard = ({
     vote_average: voteAverage,
     tagline,
   },
-  changeShowMovieDescription,
-  changeMovieDetails,
-  movieDetails,
+  showMovie,
   deleteMovie,
   editMovie,
 }) => {
   const [hidden, setHidden] = useState('hide');
   const toggleHidden = () => setHidden(hidden ? '' : 'hide');
 
-  const changeMovieDetailsCallback = ({ target: { className } }) => {
-    if (className === 'movie-image') {
-      changeMovieDetails((prevState) => ({
-        ...prevState,
-        ...{
-          url,
-          title,
-          releaseDate,
-          overview,
-          runtime,
-          voteAverage,
-          tagline,
-        },
-      }));
-      changeShowMovieDescription(true);
-    }
-  };
-
   return (
-    <div className="movie" onClick={changeMovieDetailsCallback}>
+    <div className="movie" onClick={() => showMovie(id)}>
       <button
         className="movie-three-dots-icon hide"
         onClick={toggleHidden}

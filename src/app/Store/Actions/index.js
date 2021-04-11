@@ -6,6 +6,8 @@ const actionTypes = {
   moviesGenreSet: 'MOVIES_GENRE_SET',
   modalRequested: 'MODAL_EDIT_REQUESTED',
   modalClosed: 'MODAL_CLOSED',
+  movieRequested: 'MOVIE_REQUESTED',
+  movieClosed: 'MOVIE_CLOSED',
 };
 
 const actionCreators = {
@@ -16,6 +18,14 @@ const actionCreators = {
   showModal: (args = {}) => ({
     type: actionTypes.modalRequested,
     payload: Object.assign({ isOpen: true }, args),
+  }),
+  showMovie: (id) => ({
+    type: actionTypes.movieRequested,
+    payload: { isOpen: true, id },
+  }),
+  closeMovie: () => ({
+    type: actionTypes.movieClosed,
+    payload: { isOpen: false },
   }),
 };
 

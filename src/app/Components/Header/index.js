@@ -8,27 +8,13 @@ import MovieDetails from '../MovieDetails';
 import getAddModalInput from './addMovieInput';
 import { ICONS_CODES, MODALS } from '../../Constants';
 import { actionCreators } from '../../Store/Actions';
-// import ModalWrap from '../../Components/ModalWrap';
 
-const Header = ({
-  filter: { genres },
-  showMovieDescription,
-  changeShowMovieDescription,
-  movieDetails,
-  dispatch,
-}) => {
+const Header = ({ filter: { genres }, movie, moviesData, dispatch }) => {
   const onModalOpen = () => {
     changeIsOpen(true);
   };
   const onModalClose = () => {
     changeIsOpen(false);
-  };
-  const addInput = getAddModalInput(genres, onModalClose);
-  const [isOpen, changeIsOpen] = useState(false);
-  const [modalInner, changeModalInner] = useState(() => {});
-  const prepareModal = (inputType) => () => {
-    changeModalInner(inputType);
-    onModalOpen();
   };
 
   const addMovie = () =>
@@ -39,10 +25,10 @@ const Header = ({
       <header id="header">
         <div id="top-bar">
           <img src="" alt="netflix_roulette" />
-          {showMovieDescription ? (
+          {movie.isOpen ? (
             <button
               id="search-icon"
-              onClick={() => changeShowMovieDescription(!showMovieDescription)}
+              onClick={() => changeShowMovieDescription(!showMovieDescription)} //TODO change
             >
               {ICONS_CODES.SEARCH}
             </button>
@@ -56,12 +42,15 @@ const Header = ({
           <Search />
         )}
       </header>
-      {/* <ModalWrap isOpen={isOpen} onClose={onModalClose}>
-        <>{modalInner}</>
-      </ModalWrap> */}
     </>
   );
 };
 
-const mapState = ({ filter }) => ({ filter });
+const mapState = ({ filter, movie, movies: { data: moviesData } }) => ({
+  filter,
+  movie,
+  moviesData,
+});
 export default connect(mapState)(Header);
+
+// TODO not forget change dispatchers for 'movie'
