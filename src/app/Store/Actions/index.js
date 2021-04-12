@@ -6,7 +6,9 @@ const actionTypes = {
   moviesGenreSet: 'MOVIES_GENRE_SET',
   modalRequested: 'MODAL_EDIT_REQUESTED',
   modalClosed: 'MODAL_CLOSED',
-  movieRequested: 'MOVIE_REQUESTED',
+  movieFetchRequested: 'MOVIE_FETCH_REQUESTED',
+  movieFetchSucceeded: 'MOVIE_FETCH_SUCCEEDED',
+  movieFetchFailed: 'MOVIE_FETCH_FAILED',
   movieClosed: 'MOVIE_CLOSED',
 };
 
@@ -20,8 +22,8 @@ const actionCreators = {
     payload: Object.assign({ isOpen: true }, args),
   }),
   showMovie: (id) => ({
-    type: actionTypes.movieRequested,
-    payload: { isOpen: true, id },
+    type: actionTypes.movieFetchRequested,
+    payload: { isOpen: true, movieId: id },
   }),
   closeMovie: () => ({
     type: actionTypes.movieClosed,

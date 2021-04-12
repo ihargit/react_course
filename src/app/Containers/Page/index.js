@@ -8,14 +8,8 @@ import Search from '../../Pages/Search';
 import { DEFAULT_MOVIE_DETAILS } from '../../Constants';
 
 function Page({ movies }) {
-  const [showMovieDescription, changeShowMovieDescription] = useState(false);
-  const [movieDetails, changeMovieDetails] = useState(DEFAULT_MOVIE_DETAILS);
 
   const moviesProps = {
-    showMovieDescription,
-    changeShowMovieDescription,
-    changeMovieDetails,
-    movieDetails,
   };
 
   return (

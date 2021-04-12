@@ -16,7 +16,7 @@ const MoviesList = ({
     dispatch(actionCreators.showModal({ mode: MODALS.delete, movieId: id }));
   const editMovie = (id) =>
     dispatch(actionCreators.showModal({ mode: MODALS.edit, movieId: id }));
-  const showMovie = (id) => dispatch(actionCreators.showMovie({ movieId: id }));
+  const showMovie = (id) => dispatch(actionCreators.showMovie(id));
   return (
     <>
       <MoviesFilter />

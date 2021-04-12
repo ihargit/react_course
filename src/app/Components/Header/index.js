@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import './style.css';
 import Search from '../Search';
 import MovieDetails from '../MovieDetails';
-import getAddModalInput from './addMovieInput';
 import { ICONS_CODES, MODALS } from '../../Constants';
 import { actionCreators } from '../../Store/Actions';
 
@@ -19,6 +18,8 @@ const Header = ({ filter: { genres }, movie, moviesData, dispatch }) => {
 
   const addMovie = () =>
     dispatch(actionCreators.showModal({ mode: MODALS.add }));
+  const closeMovie = () =>
+    dispatch(actionCreators.closeMovie({ isOpen: false }));
 
   return (
     <>
@@ -28,7 +29,7 @@ const Header = ({ filter: { genres }, movie, moviesData, dispatch }) => {
           {movie.isOpen ? (
             <button
               id="search-icon"
-              onClick={() => changeShowMovieDescription(!showMovieDescription)} //TODO change
+              onClick={closeMovie}
             >
               {ICONS_CODES.SEARCH}
             </button>
@@ -36,8 +37,8 @@ const Header = ({ filter: { genres }, movie, moviesData, dispatch }) => {
             <button onClick={addMovie}>+ ADD MOVIE</button>
           )}
         </div>
-        {showMovieDescription ? (
-          <MovieDetails movieDetails={movieDetails} />
+        {movie.isOpen ? (
+          <MovieDetails movieDetails={movie.details} />
         ) : (
           <Search />
         )}
@@ -52,5 +53,3 @@ const mapState = ({ filter, movie, movies: { data: moviesData } }) => ({
   moviesData,
 });
 export default connect(mapState)(Header);
-
-// TODO not forget change dispatchers for 'movie'

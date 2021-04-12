@@ -6,8 +6,9 @@ const url = process.env.URL || BASE_URL;
 
 const fetch = async (path, ...args) => {
   try {
-    const queryString = `${qs.stringify(Object.assign({}, ...args))}`;
-    return (await axios.get(`${url}/${path}?${queryString}`)).data;
+    let queryString = `${qs.stringify(Object.assign({}, ...args))}`;
+    queryString = queryString ? `?${queryString}` : '';
+    return (await axios.get(`${url}/${path}${queryString}`)).data;
   } catch (error) {
     console.error(error);
   }
@@ -17,4 +18,12 @@ const getMovies = async (args) => {
   return await fetch('movies', DEFAULT_MOVIE_FETCH_ARGS, args);
 };
 
-export { getMovies };
+const getMovie = async ({ movieId }) => {
+  return await fetch(`movies/${movieId}`);
+};
+
+export { getMovies, getMovie };
+
+// TODO redux for filters and sort
+// TODO redux update, delete, add movies
+// TODO routers for pages (404)

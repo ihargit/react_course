@@ -28,6 +28,7 @@ const initState = {
   movie: {
     isOpen: false,
     movieId: 0,
+    details: {},
   },
 };
 
