@@ -5,22 +5,18 @@ import ModalWrap from '../../Components/ModalWrap';
 
 import Movie from '../../Pages/Movie';
 import Search from '../../Pages/Search';
-import { DEFAULT_MOVIE_DETAILS } from '../../Constants';
 
 function Page({ movies }) {
-
-  const moviesProps = {
-  };
 
   return (
     <>
       <Router forceRefresh="false">
         <Switch>
           <Route path="/film/:id">
-            <Movie {...moviesProps} />
+            <Movie />
           </Route>
           <Route path="/search">
-            <Search {...moviesProps} />
+            <Search />
           </Route>
         </Switch>
       </Router>
