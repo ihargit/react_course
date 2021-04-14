@@ -17,6 +17,7 @@ const ModalWrap = ({
   dispatch,
 }) => {
   const closeModal = () => dispatch(actionCreators.closeModal());
+  
 
   let getModalContent;
   switch (mode) {

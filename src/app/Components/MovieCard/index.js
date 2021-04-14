@@ -22,7 +22,12 @@ const MovieCard = ({
   const toggleHidden = () => setHidden(hidden ? '' : 'hide');
 
   return (
-    <div className="movie" onClick={() => showMovie(id)}>
+    <div
+      className="movie"
+      onClick={({ target: { className } }) =>
+        className === 'movie-image' ? showMovie(id) : null
+      }
+    >
       <button
         className="movie-three-dots-icon hide"
         onClick={toggleHidden}
