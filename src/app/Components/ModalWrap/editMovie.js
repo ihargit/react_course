@@ -2,8 +2,32 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { v4 as uuidV4 } from 'uuid';
 
+const mapValues = ({
+  url,
+  title,
+  movieGenres,
+  id,
+  releaseDate,
+  overview,
+  runtime,
+}) => ({
+  poster_path: url,
+  title,
+  genres: movieGenres,
+  id,
+  release_date: releaseDate,
+  overview,
+  runtime,
+});
+
 export default function getEditMovieInput({
-  movie: {
+  movie,
+  genres,
+  closeModal,
+  dispatch,
+  actionCreators,
+}) {
+  const {
     poster_path: url,
     title,
     genres: movieGenres,
@@ -11,39 +35,52 @@ export default function getEditMovieInput({
     release_date: releaseDate,
     overview,
     runtime,
-  },
-  genres,
-  closeModal,
-  dispatch,
-  actionCreators,
-}) {
+  } = movie;
   const formik = useFormik({
     initialValues: {
+      id,
       title,
+      releaseDate,
+      url,
+      movieGenres,
+      overview,
+      runtime: runtime || '',
     },
     onSubmit: (values) => {
+      const payload = Object.assign({}, movie, mapValues(values));
       alert(JSON.stringify(values, null, 2));
+      dispatch(actionCreators.editMovie(payload));
+      closeModal();
     },
   });
   return () => (
     <>
       <h4>EDIT MOVIE</h4>
-      <form onSubmit={formik.handleSubmit} >
+      <form onSubmit={formik.handleSubmit}>
         <label>MOVIE ID</label>
         <p>{id}</p>
         <label>TITLE</label>
-        <input type="text" name="title" id="title" lable="TITLE"></input>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          lable="TITLE"
+          value={formik.values.title}
+          onChange={formik.handleChange}
+        ></input>
         <label>RELEASE DATE</label>
         <input
           type="date"
-          defaultValue={releaseDate}
+          value={formik.values.releaseDate}
+          onChange={formik.handleChange}
           id="releaseDate"
           name="releaseDate"
         ></input>
         <label>MOVIE URL</label>
         <input
           type="text"
-          defaultValue="www.url.com"
+          value={formik.values.url}
+          onChange={formik.handleChange}
           id="movieUrl"
           name="movieUrl"
         ></input>
@@ -51,7 +88,8 @@ export default function getEditMovieInput({
         <select
           id="genre"
           name="genre"
-          defaultValue={movieGenres}
+          value={formik.values.movieGenres}
+          onChange={formik.handleChange}
           onChange={() => {}}
           multiple
         >
@@ -63,29 +101,25 @@ export default function getEditMovieInput({
         </select>
         <label>OVERVIEW</label>
         <textarea
-          defaultValue={overview}
+          value={formik.values.overview}
+          onChange={formik.handleChange}
           id="overview"
           name="overview"
         ></textarea>
         <label>RUNTIME</label>
         <input
           type="text"
-          defaultValue={runtime}
+          value={formik.values.runtime}
+          onChange={formik.handleChange}
           id="runtime"
           name="runtime"
         ></input>
+        <div className="modal-buttons">
+          <button type="submit" className="button red">
+            SAVE
+          </button>
+        </div>
       </form>
-      <div className="modal-buttons">
-        <button
-          className="button red"
-          onClick={() => {
-            dispatch(actionCreators.editMovie(id)); // TODO send something other to edit
-            closeModal();
-          }}
-        >
-          SAVE
-        </button>
-      </div>
     </>
   );
 }

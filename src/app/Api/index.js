@@ -4,9 +4,9 @@ import { DEFAULT_MOVIE_FETCH_ARGS, BASE_URL } from '../Constants';
 
 const url = process.env.URL || BASE_URL;
 
-const fetch = async (method, path, ...args) => {
+const fetch = async (method, path, args, payload) => {
   try {
-    let queryString = `${qs.stringify(Object.assign({}, ...args))}`;
+    let queryString = args ? `${qs.stringify(args)}` : '';
     queryString = queryString ? `?${queryString}` : '';
     return (await axios[method](`${url}/${path}${queryString}`)).data;
   } catch (error) {
@@ -15,7 +15,11 @@ const fetch = async (method, path, ...args) => {
 };
 
 const getMovies = async (args) => {
-  return await fetch('get', 'movies', DEFAULT_MOVIE_FETCH_ARGS, args);
+  return await fetch(
+    'get',
+    'movies',
+    Object.assign({}, DEFAULT_MOVIE_FETCH_ARGS, args)
+  );
 };
 
 const getMovie = async ({ movieId }) => {
@@ -23,15 +27,16 @@ const getMovie = async ({ movieId }) => {
 };
 
 const deleteMovie = async ({ movieId }) => {
-  console.log(movieId)
+  console.log(movieId);
   return await fetch('delete', `movies/${movieId}`);
 };
 
-// const addMovie = async ({ movieId }) => {
-//   return await fetch('delete', `movies/${movieId}`);
-// };
+const editMovie = async ({ movieData }) => {
+  return await fetch('put', `movies`, null, movieData);
+};
 
-export { getMovies, getMovie, deleteMovie };
+export { getMovies, getMovie, deleteMovie, editMovie };
 
 // TODO redux update, delete, add movies
 // TODO routers for pages (404)
+// TODO fix BAD request on PUT movie

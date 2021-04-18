@@ -21,6 +21,7 @@ const {
   moviesSortSelectorSet,
   movieDeletionRequested,
   movieDeletionFailed,
+  movieEditingRequested,
 } = actionTypes;
 
 function* fetchMovies({ type, payload }) {
@@ -65,11 +66,22 @@ function* deleteMovie({ type, payload: { movieId } }) {
   }
 }
 
+function* editMovie({ type, payload: { movieData } }) {
+  try {
+    yield call(Api.editMovie, {
+      movieData,
+    });
+  } catch (e) {
+    yield put({ type: movieDeletionFailed, payload: e.message });
+  }
+}
+
 export default function* rootSaga() {
   yield takeLatest(moviesFetchRequested, fetchMovies);
   yield takeLatest(movieFetchRequested, fetchMovie);
   yield takeLatest(moviesGenreSet, fetchMovies);
   yield takeLatest(moviesSortSelectorSet, fetchMovies);
   yield takeLatest(movieDeletionRequested, deleteMovie);
+  yield takeLatest(movieEditingRequested, editMovie);
   yield put({ type: moviesFetchRequested });
 }
