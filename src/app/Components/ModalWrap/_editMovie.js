@@ -1,5 +1,4 @@
 import React from 'react';
-import { useFormik } from 'formik';
 import { v4 as uuidV4 } from 'uuid';
 
 export default function getEditMovieInput({
@@ -17,37 +16,36 @@ export default function getEditMovieInput({
   dispatch,
   actionCreators,
 }) {
-  const formik = useFormik({
-    initialValues: {
-      title,
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
   return () => (
     <>
       <h4>EDIT MOVIE</h4>
-      <form onSubmit={formik.handleSubmit} >
+      <form>
         <label>MOVIE ID</label>
         <p>{id}</p>
         <label>TITLE</label>
-        <input type="text" name="title" id="title" lable="TITLE"></input>
+        <br />
+        <input type="text" defaultValue={title} id="title" name="title"></input>
+        <br />
         <label>RELEASE DATE</label>
+        <br />
         <input
           type="date"
           defaultValue={releaseDate}
           id="releaseDate"
           name="releaseDate"
         ></input>
+        <br />
         <label>MOVIE URL</label>
+        <br />
         <input
           type="text"
           defaultValue="www.url.com"
           id="movieUrl"
           name="movieUrl"
         ></input>
+        <br />
         <label>GENRE</label>
+        <br />
         <select
           id="genre"
           name="genre"
@@ -61,19 +59,24 @@ export default function getEditMovieInput({
             </option>
           ))}
         </select>
+        <br />
         <label>OVERVIEW</label>
+        <br />
         <textarea
           defaultValue={overview}
           id="overview"
           name="overview"
         ></textarea>
+        <br />
         <label>RUNTIME</label>
+        <br />
         <input
           type="text"
           defaultValue={runtime}
           id="runtime"
           name="runtime"
         ></input>
+        <br />
       </form>
       <div className="modal-buttons">
         <button
