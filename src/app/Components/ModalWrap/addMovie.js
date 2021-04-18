@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
-export default function getAddModalInput(genresPossible, closeModal) {
+export default function getAddMovieInput({ genres, closeModal, dispatch, actionCreators }) {
   return () => (
     <>
       <h4>ADD MOVIE</h4>
@@ -21,9 +21,9 @@ export default function getAddModalInput(genresPossible, closeModal) {
         <label>GENRE</label>
         <br />
         <select id="genre" name="genre" onChange={() => {}}>
-          {genresPossible.map(({ value, view }) => (
+          {genres.map((value) => (
             <option value={value} key={uuidV4()}>
-              {view}
+              {value}
             </option>
           ))}
         </select>
@@ -38,18 +38,19 @@ export default function getAddModalInput(genresPossible, closeModal) {
         <br />
       </form>
       <div className="modal-buttons">
-      <button
+        <button
           className="button"
-          onClick={(id) => {
-            document.getElementById("add-movie-form").reset();
+          onClick={() => {
+            document.getElementById('add-movie-form').reset();
           }}
         >
           RESET
         </button>
         <button
           className="button red"
-          onClick={(id) => {
-            closeModal(); // TODO implement movie add
+          onClick={() => {
+            dispatch(actionCreators.addMovie()); //TODO send info for movie
+            closeModal();
           }}
         >
           SUBMIT

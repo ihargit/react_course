@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 
 const MovieDetails = ({
   movieDetails: {
-    url,
+    poster_path: url,
     title,
-    releaseDate,
+    release_date: releaseDate,
     overview,
     runtime,
-    voteAverage,
+    vote_average: voteAverage,
     tagline,
   },
 }) => {
@@ -24,7 +24,7 @@ const MovieDetails = ({
         </div>
         <p className="movie-tagline">{tagline}</p>
         <p className="movie-release">
-          {`${String(new Date(releaseDate).getFullYear())}  ${runtime} min`}
+          {`${String(new Date(releaseDate).getFullYear())}  ${runtime ? `${runtime} min` : ''}`}
         </p>
         <p>{overview}</p>
       </div>

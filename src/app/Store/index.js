@@ -4,16 +4,32 @@ import createSagasMiddleware from 'redux-saga';
 
 import rootReducer from './Reducers';
 import rootSaga from './Sagas';
-import { SELECTORS, GENRES,  DEFAULT_MOVIE_FETCH_ARGS } from '../Constants';
+import {
+  SELECTORS,
+  GENRES,
+  GENRES_ALL,
+  DEFAULT_MOVIE_FETCH_ARGS,
+  MODALS,
+} from '../Constants';
 import * as allMovies from '../../movies.json';
 
 const initState = {
   movies: allMovies,
   filter: Object.assign(DEFAULT_MOVIE_FETCH_ARGS, {
     genres: GENRES,
-    genre: GENRES.all,
+    genre: GENRES_ALL,
     sortSelectors: SELECTORS,
   }),
+  modal: {
+    isOpen: false,
+    movieId: 0,
+    mode: MODALS.add,
+  },
+  movie: {
+    isOpen: false,
+    movieId: 0,
+    details: {},
+  },
 };
 
 const sagaMiddleware = createSagasMiddleware();

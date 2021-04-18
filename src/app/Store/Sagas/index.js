@@ -14,8 +14,13 @@ const {
   moviesFetchSucceeded,
   moviesFetchFailed,
   moviesFetchRequested,
+  movieFetchSucceeded,
+  movieFetchFailed,
+  movieFetchRequested,
   moviesGenreSet,
   moviesSortSelectorSet,
+  movieDeletionRequested,
+  movieDeletionFailed,
 } = actionTypes;
 
 function* fetchMovies({ type, payload }) {
@@ -23,7 +28,6 @@ function* fetchMovies({ type, payload }) {
     const { sortBy, sortOrder, filter, limit, offset } = yield select(
       ({ filter }) => filter
     );
-    console.log(sortBy, sortOrder, filter, limit, offset)
     const movies = yield call(Api.getMovies, {
       sortBy,
       sortOrder,
@@ -37,9 +41,35 @@ function* fetchMovies({ type, payload }) {
   }
 }
 
+function* fetchMovie({ type, payload: { movieId } }) {
+  try {
+    const details = yield call(Api.getMovie, {
+      movieId,
+    });
+    yield put({
+      type: movieFetchSucceeded,
+      payload: { details, movieId, isOpen: true },
+    });
+  } catch (e) {
+    yield put({ type: movieFetchFailed, payload: e.message });
+  }
+}
+
+function* deleteMovie({ type, payload: { movieId } }) {
+  try {
+    yield call(Api.deleteMovie, {
+      movieId,
+    });
+  } catch (e) {
+    yield put({ type: movieDeletionFailed, payload: e.message });
+  }
+}
+
 export default function* rootSaga() {
   yield takeLatest(moviesFetchRequested, fetchMovies);
+  yield takeLatest(movieFetchRequested, fetchMovie);
   yield takeLatest(moviesGenreSet, fetchMovies);
   yield takeLatest(moviesSortSelectorSet, fetchMovies);
+  yield takeLatest(movieDeletionRequested, deleteMovie);
   yield put({ type: moviesFetchRequested });
 }

@@ -1,9 +1,3 @@
-const GENRES_POSSIBLE = [
-  { value: 'comedy', view: 'comedy' },
-  { value: 'drama', view: 'drama' },
-  { value: 'romance', view: 'romance' },
-];
-
 const SELECTORS = {
   releaseDate: 'release_date',
   budget: 'budget',
@@ -22,28 +16,28 @@ const DEFAULT_MOVIE_DETAILS = {
   tagline: '',
 };
 
-const GENRES = {
-  all: 'all',
-  action: 'action',
-  adventure: 'adventure',
-  animation: 'animation',
-  comedy: 'comedy',
-  crime: 'crime',
-  documentary: 'documentary',
-  drama: 'drama',
-  family: 'family',
-  fantasy: 'fantasy',
-  history: 'history',
-  horror: 'horror',
-  music: 'music',
-  mystery: 'mystery',
-  romance: 'romance',
-  scienceFiction: 'science fiction',
-  thriller: 'thriller',
-  tvMovie: 'tv movie',
-  war: 'war',
-  western: 'western',
-};
+const GENRES_ALL = 'all';
+
+const GENRES = [
+  'adventure',
+  'animation',
+  'comedy',
+  'crime',
+  'documentary',
+  'drama',
+  'family',
+  'fantasy',
+  'history',
+  'horror',
+  'music',
+  'mystery',
+  'romance',
+  'science fiction',
+  'thriller',
+  'tv movie',
+  'war',
+  'western',
+];
 
 const ICONS_CODES = {
   SEARCH: '\u2315',
@@ -52,6 +46,12 @@ const ICONS_CODES = {
 const SORT_ORDER = {
   desc: 'desc',
   asc: 'asc',
+};
+
+const MODALS = {
+  add: 'add',
+  edit: 'edit',
+  delete: 'delete',
 };
 
 const DEFAULT_MOVIE_FETCH_ARGS = {
@@ -67,7 +67,7 @@ const DEFAULT_MOVIE_FETCH_ARGS = {
 const BASE_URL = 'http://localhost:4000';
 
 export {
-  GENRES_POSSIBLE,
+  GENRES_ALL,
   SELECTORS,
   DEFAULT_MOVIE_DETAILS,
   ICONS_CODES,
@@ -75,4 +75,5 @@ export {
   DEFAULT_MOVIE_FETCH_ARGS,
   BASE_URL,
   SORT_ORDER,
+  MODALS,
 };
