@@ -17,22 +17,41 @@ const ModalWrap = ({
   dispatch,
 }) => {
   const closeModal = () => dispatch(actionCreators.closeModal());
-  
 
   let getModalContent;
   switch (mode) {
     case MODALS.add:
-      getModalContent = getAddMovieInput(genres, closeModal);
+      getModalContent = getAddMovieInput({
+        genres,
+        closeModal,
+        dispatch,
+        actionCreators,
+      });
       break;
     case MODALS.edit:
       const movie = moviesData.find((data) => data.id === movieId);
-      getModalContent = getEditMovieInput({ movie, genres, closeModal });
+      getModalContent = getEditMovieInput({
+        movie,
+        genres,
+        closeModal,
+        dispatch,
+      });
       break;
     case MODALS.delete:
-      getModalContent = getDeleteMovieInput(movieId, closeModal);
+      getModalContent = getDeleteMovieInput({
+        movieId,
+        closeModal,
+        dispatch,
+        actionCreators,
+      });
       break;
     default:
-      getModalContent = getAddMovieInput(genres, closeModal);
+      getModalContent = getAddMovieInput({
+        genres,
+        closeModal,
+        dispatch,
+        actionCreators,
+      });
   }
 
   return (
@@ -55,3 +74,5 @@ const mapState = ({
   filter: { genres },
 }) => ({ isOpen, movieId, mode, genres, moviesData });
 export default connect(mapState)(ModalWrap);
+
+// TODO use createRef()

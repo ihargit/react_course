@@ -13,6 +13,8 @@ export default function getEditMovieInput({
   },
   genres,
   closeModal,
+  dispatch,
+  actionCreators
 }) {
   return () => (
     <>
@@ -79,8 +81,9 @@ export default function getEditMovieInput({
       <div className="modal-buttons">
         <button
           className="button red"
-          onClick={(id) => {
-            closeModal(); // TODO implement movie deletion
+          onClick={() => {
+            dispatch(actionCreators.editMovie(id)); // TODO send something other to edit
+            closeModal();
           }}
         >
           SAVE

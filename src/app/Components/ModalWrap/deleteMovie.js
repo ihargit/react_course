@@ -1,7 +1,12 @@
 import React from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
-export default function getDeleteMovieInput({ id, closeModal }) {
+export default function getDeleteMovieInput({
+  movieId,
+  closeModal,
+  dispatch,
+  actionCreators,
+}) {
   return () => (
     <>
       <p>DELETE MOVIE</p>
@@ -9,8 +14,9 @@ export default function getDeleteMovieInput({ id, closeModal }) {
       <div className="modal-buttons">
         <button
           className="button red"
-          onClick={(id) => {
-            closeModal(); // TODO implement movie deletion
+          onClick={() => {
+            dispatch(actionCreators.deleteMovie(movieId));
+            closeModal();
           }}
         >
           CONFIRM

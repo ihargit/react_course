@@ -23,6 +23,7 @@ const getMovie = async ({ movieId }) => {
 };
 
 const deleteMovie = async ({ movieId }) => {
+  console.log(movieId)
   return await fetch('delete', `movies/${movieId}`);
 };
 
@@ -32,6 +33,5 @@ const deleteMovie = async ({ movieId }) => {
 
 export { getMovies, getMovie, deleteMovie };
 
-// TODO redux for filters and sort
 // TODO redux update, delete, add movies
 // TODO routers for pages (404)

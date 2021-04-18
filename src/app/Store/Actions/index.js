@@ -10,6 +10,7 @@ const actionTypes = {
   movieFetchSucceeded: 'MOVIE_FETCH_SUCCEEDED',
   movieFetchFailed: 'MOVIE_FETCH_FAILED',
   movieClosed: 'MOVIE_CLOSED',
+  movieDeletionRequested: 'MOVIE_DELETION_REQUESTED',
 };
 
 const actionCreators = {
@@ -28,6 +29,10 @@ const actionCreators = {
   closeMovie: () => ({
     type: actionTypes.movieClosed,
     payload: { isOpen: false },
+  }),
+  deleteMovie: (id) => ({
+    type: actionTypes.movieDeletionRequested,
+    payload: { movieId: id },
   }),
 };
 
