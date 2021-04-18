@@ -2,11 +2,14 @@
   justify-content: space-around;
   margin-right: 1em;
   margin-bottom: 1em;
+  max-width: 250px;
 }
 
 .movie-image {
   min-height: 350px;
   min-width: 250px;
+  max-height: 350px;
+  max-width: 250px;
   background-color: rgb(197, 197, 206);
 }
 

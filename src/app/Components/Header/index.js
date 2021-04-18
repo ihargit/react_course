@@ -1,59 +1,55 @@
 import React, { useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
+import { connect } from 'react-redux';
+
 import './style.css';
 import Search from '../Search';
 import MovieDetails from '../MovieDetails';
-import getAddModalInput from './addMovieInput';
-import { GENRES_POSSIBLE, ICONS_CODES } from '../../Constants';
-import ModalWrap from '../../Components/ModalWrap';
+import { ICONS_CODES, MODALS } from '../../Constants';
+import { actionCreators } from '../../Store/Actions';
 
-const Header = ({
-  genresPossible,
-  showMovieDescription,
-  changeShowMovieDescription,
-  movieDetails,
-}) => {
+const Header = ({ filter: { genres }, movie, moviesData, dispatch }) => {
   const onModalOpen = () => {
     changeIsOpen(true);
   };
   const onModalClose = () => {
     changeIsOpen(false);
   };
-  const addInput = getAddModalInput(GENRES_POSSIBLE, onModalClose);
-  const [isOpen, changeIsOpen] = useState(false);
-  const [modalInner, changeModalInner] = useState(() => {});
-  const prepareModal = (inputType) => () => {
-    changeModalInner(inputType);
-    onModalOpen();
-  };
+
+  const addMovie = () =>
+    dispatch(actionCreators.showModal({ mode: MODALS.add }));
+  const closeMovie = () =>
+    dispatch(actionCreators.closeMovie({ isOpen: false }));
 
   return (
     <>
       <header id="header">
         <div id="top-bar">
           <img src="" alt="netflix_roulette" />
-          {showMovieDescription ? (
+          {movie.isOpen ? (
             <button
               id="search-icon"
-              onClick={() => changeShowMovieDescription(!showMovieDescription)}
+              onClick={closeMovie}
             >
               {ICONS_CODES.SEARCH}
             </button>
           ) : (
-            <button onClick={prepareModal(addInput)}>+ ADD MOVIE</button>
+            <button onClick={addMovie}>+ ADD MOVIE</button>
           )}
         </div>
-        {showMovieDescription ? (
-          <MovieDetails movieDetails={movieDetails} />
+        {movie.isOpen ? (
+          <MovieDetails movieDetails={movie.details} />
         ) : (
           <Search />
         )}
       </header>
-      <ModalWrap isOpen={isOpen} onClose={onModalClose}>
-        <>{modalInner}</>
-      </ModalWrap>
     </>
   );
 };
 
-export default Header;
+const mapState = ({ filter, movie, movies: { data: moviesData } }) => ({
+  filter,
+  movie,
+  moviesData,
+});
+export default connect(mapState)(Header);
