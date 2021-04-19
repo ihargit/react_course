@@ -72,7 +72,7 @@ function* editMovie({ type, payload: { movieData } }) {
       movieData,
     });
   } catch (e) {
-    yield put({ type: movieDeletionFailed, payload: e.message });
+    yield put({ type: movieEditionFailed, payload: e.message });
   }
 }
 

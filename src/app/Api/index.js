@@ -4,11 +4,11 @@ import { DEFAULT_MOVIE_FETCH_ARGS, BASE_URL } from '../Constants';
 
 const url = process.env.URL || BASE_URL;
 
-const fetch = async (method, path, args, payload) => {
+const fetch = async (method, path, args, payload = null) => {
   try {
     let queryString = args ? `${qs.stringify(args)}` : '';
     queryString = queryString ? `?${queryString}` : '';
-    return (await axios[method](`${url}/${path}${queryString}`)).data;
+    return (await axios[method](`${url}/${path}${queryString}`, payload)).data;
   } catch (error) {
     console.error(error);
   }

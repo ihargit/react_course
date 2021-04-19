@@ -20,6 +20,18 @@ const mapValues = ({
   runtime,
 });
 
+const validate = values => {
+  const errors = {};
+
+  if (!Number(values.runtime)) {
+    errors.runtime = 'Required';
+  } else if (isNaN(values.runtime)) {
+    errors.runtime = 'Must be a number';
+  }
+
+  return errors;
+};
+
 export default function getEditMovieInput({
   movie,
   genres,
@@ -44,11 +56,13 @@ export default function getEditMovieInput({
       url,
       movieGenres,
       overview,
-      runtime: runtime || '',
+      runtime,
     },
+    validate,
     onSubmit: (values) => {
-      const payload = Object.assign({}, movie, mapValues(values));
-      alert(JSON.stringify(values, null, 2));
+      const payload = Object.assign({}, movie, mapValues(values), {
+        tagline: movie.tagline || 'Tagline unknown',
+      });
       dispatch(actionCreators.editMovie(payload));
       closeModal();
     },
@@ -108,12 +122,15 @@ export default function getEditMovieInput({
         ></textarea>
         <label>RUNTIME</label>
         <input
-          type="text"
+          type="number"
           value={formik.values.runtime}
           onChange={formik.handleChange}
           id="runtime"
           name="runtime"
         ></input>
+        {formik.errors.runtime ? (
+         <div>{formik.errors.runtime}</div>
+       ) : null}
         <div className="modal-buttons">
           <button type="submit" className="button red">
             SAVE
