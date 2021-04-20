@@ -13,6 +13,7 @@ const actionTypes = {
   movieDeletionRequested: 'MOVIE_DELETION_REQUESTED',
   movieEditingRequested: 'MOVIE_EDITING_REQUESTED',
   movieAdditionRequested: 'MOVIE_ADDITION_REQUESTED',
+  movieAdditionFailed: 'MOVIE_ADDITION_FAILED',
 };
 
 const actionCreators = {
@@ -38,6 +39,10 @@ const actionCreators = {
   }),
   editMovie: (movieData) => ({
     type: actionTypes.movieEditingRequested,
+    payload: { movieData: movieData },
+  }),
+  addMovie: (movieData) => ({
+    type: actionTypes.movieAdditionRequested,
     payload: { movieData: movieData },
   }),
 };

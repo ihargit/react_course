@@ -104,7 +104,6 @@ export default function getEditMovieInput({
           name="genre"
           value={formik.values.movieGenres}
           onChange={formik.handleChange}
-          onChange={() => {}}
           multiple
         >
           {genres.map((value) => (

@@ -35,8 +35,11 @@ const editMovie = async ({ movieData }) => {
   return await fetch('put', `movies`, null, movieData);
 };
 
+const addMovie = async ({ movieData }) => {
+  return await fetch('post', `movies`, null, movieData);
+};
+
 export { getMovies, getMovie, deleteMovie, editMovie };
 
-// TODO redux update, delete, add movies
 // TODO routers for pages (404)
 // TODO fix BAD request on PUT movie
