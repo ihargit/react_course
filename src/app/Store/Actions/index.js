@@ -11,6 +11,9 @@ const actionTypes = {
   movieFetchFailed: 'MOVIE_FETCH_FAILED',
   movieClosed: 'MOVIE_CLOSED',
   movieDeletionRequested: 'MOVIE_DELETION_REQUESTED',
+  movieEditingRequested: 'MOVIE_EDITING_REQUESTED',
+  movieAdditionRequested: 'MOVIE_ADDITION_REQUESTED',
+  movieAdditionFailed: 'MOVIE_ADDITION_FAILED',
 };
 
 const actionCreators = {
@@ -33,6 +36,14 @@ const actionCreators = {
   deleteMovie: (id) => ({
     type: actionTypes.movieDeletionRequested,
     payload: { movieId: id },
+  }),
+  editMovie: (movieData) => ({
+    type: actionTypes.movieEditingRequested,
+    payload: { movieData: movieData },
+  }),
+  addMovie: (movieData) => ({
+    type: actionTypes.movieAdditionRequested,
+    payload: { movieData: movieData },
   }),
 };
 

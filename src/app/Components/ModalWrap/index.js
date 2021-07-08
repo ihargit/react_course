@@ -35,6 +35,7 @@ const ModalWrap = ({
         genres,
         closeModal,
         dispatch,
+        actionCreators
       });
       break;
     case MODALS.delete:

@@ -1,8 +1,45 @@
 import React from 'react';
+import { useFormik } from 'formik';
 import { v4 as uuidV4 } from 'uuid';
 
+const mapValues = ({
+  url,
+  title,
+  movieGenres,
+  id,
+  releaseDate,
+  overview,
+  runtime,
+}) => ({
+  poster_path: url,
+  title,
+  genres: movieGenres,
+  id,
+  release_date: releaseDate,
+  overview,
+  runtime,
+});
+
+const validate = values => {
+  const errors = {};
+
+  if (!Number(values.runtime)) {
+    errors.runtime = 'Required';
+  } else if (isNaN(values.runtime)) {
+    errors.runtime = 'Must be a number';
+  }
+
+  return errors;
+};
+
 export default function getEditMovieInput({
-  movie: {
+  movie,
+  genres,
+  closeModal,
+  dispatch,
+  actionCreators,
+}) {
+  const {
     poster_path: url,
     title,
     genres: movieGenres,
@@ -10,47 +47,63 @@ export default function getEditMovieInput({
     release_date: releaseDate,
     overview,
     runtime,
-  },
-  genres,
-  closeModal,
-  dispatch,
-  actionCreators
-}) {
+  } = movie;
+  const formik = useFormik({
+    initialValues: {
+      id,
+      title,
+      releaseDate,
+      url,
+      movieGenres,
+      overview,
+      runtime,
+    },
+    validate,
+    onSubmit: (values) => {
+      const payload = Object.assign({}, movie, mapValues(values), {
+        tagline: movie.tagline || 'Tagline unknown',
+      });
+      dispatch(actionCreators.editMovie(payload));
+      closeModal();
+    },
+  });
   return () => (
     <>
       <h4>EDIT MOVIE</h4>
-      <form>
+      <form onSubmit={formik.handleSubmit}>
         <label>MOVIE ID</label>
         <p>{id}</p>
         <label>TITLE</label>
-        <br />
-        <input type="text" defaultValue={title} id="title" name="title"></input>
-        <br />
+        <input
+          type="text"
+          name="title"
+          id="title"
+          lable="TITLE"
+          value={formik.values.title}
+          onChange={formik.handleChange}
+        ></input>
         <label>RELEASE DATE</label>
-        <br />
         <input
           type="date"
-          defaultValue={releaseDate}
+          value={formik.values.releaseDate}
+          onChange={formik.handleChange}
           id="releaseDate"
           name="releaseDate"
         ></input>
-        <br />
         <label>MOVIE URL</label>
-        <br />
         <input
           type="text"
-          defaultValue="www.url.com"
+          value={formik.values.url}
+          onChange={formik.handleChange}
           id="movieUrl"
           name="movieUrl"
         ></input>
-        <br />
         <label>GENRE</label>
-        <br />
         <select
           id="genre"
           name="genre"
-          defaultValue={movieGenres}
-          onChange={() => {}}
+          value={formik.values.movieGenres}
+          onChange={formik.handleChange}
           multiple
         >
           {genres.map((value) => (
@@ -59,36 +112,30 @@ export default function getEditMovieInput({
             </option>
           ))}
         </select>
-        <br />
         <label>OVERVIEW</label>
-        <br />
         <textarea
-          defaultValue={overview}
+          value={formik.values.overview}
+          onChange={formik.handleChange}
           id="overview"
           name="overview"
         ></textarea>
-        <br />
         <label>RUNTIME</label>
-        <br />
         <input
-          type="text"
-          defaultValue={runtime}
+          type="number"
+          value={formik.values.runtime}
+          onChange={formik.handleChange}
           id="runtime"
           name="runtime"
         ></input>
-        <br />
+        {formik.errors.runtime ? (
+         <div>{formik.errors.runtime}</div>
+       ) : null}
+        <div className="modal-buttons">
+          <button type="submit" className="button red">
+            SAVE
+          </button>
+        </div>
       </form>
-      <div className="modal-buttons">
-        <button
-          className="button red"
-          onClick={() => {
-            dispatch(actionCreators.editMovie(id)); // TODO send something other to edit
-            closeModal();
-          }}
-        >
-          SAVE
-        </button>
-      </div>
     </>
   );
 }
